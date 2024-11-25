@@ -253,5 +253,64 @@ describe("FreelancerEscrow Contract", function () {
             .to.emit(escrow, "VoteCast")
             .withArgs(1, arbitrator2.address, false, votingAmount2);
     });
-    
+
+    it("Should not allow an arbitrator who is the client to vote on a dispute", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+
+        // Add client as an arbitrator in the governance token
+        await governanceToken.connect(client).addArbitrator(client.address);
+
+        const votingAmount = 50;
+
+        // Client (as arbitrator) approves tokens for voting
+        await governanceToken.connect(client).approve(escrow.target, votingAmount);
+
+        // Attempt to vote as the client, who is also an arbitrator
+        await expect(
+            escrow.connect(client).voteOnDispute(1, true, votingAmount)
+        ).to.be.revertedWith("Client and freelancer cannot vote");
+
+        // Ensure other arbitrators can still vote
+        const votingAmount1 = 50;
+        const votingAmount2 = 100;
+
+        await governanceToken.connect(arbitrator1).approve(escrow.target, votingAmount1);
+        await governanceToken.connect(arbitrator2).approve(escrow.target, votingAmount2);
+
+        const tx1 = await escrow.connect(arbitrator1).voteOnDispute(1, true, votingAmount1);
+        await tx1.wait();
+
+        const tx2 = await escrow.connect(arbitrator2).voteOnDispute(1, false, votingAmount2);
+        await tx2.wait();
+
+        // Verify the vote counts in the dispute
+        const dispute = await escrow.disputes(0);
+        expect(dispute.votesForFreelancer).to.equal(votingAmount1);
+        expect(dispute.votesForClient).to.equal(votingAmount2);
+
+        // Verify token balance deduction for arbitrators
+        const arbitrator1Balance = await governanceToken.balanceOf(arbitrator1.address);
+        const arbitrator2Balance = await governanceToken.balanceOf(arbitrator2.address);
+        expect(arbitrator1Balance).to.equal(100 - votingAmount1); // Arbitrator1 started with 100 tokens
+        expect(arbitrator2Balance).to.equal(200 - votingAmount2); // Arbitrator2 started with 200 tokens
+
+        // Verify event emissions for valid votes
+        await expect(tx1)
+            .to.emit(escrow, "VoteCast")
+            .withArgs(1, arbitrator1.address, true, votingAmount1);
+        await expect(tx2)
+            .to.emit(escrow, "VoteCast")
+            .withArgs(1, arbitrator2.address, false, votingAmount2);
+    });
 });

@@ -6,7 +6,7 @@ import "./GovernanceToken.sol";
 contract FreelancerEscrow {
     address public client;
     address public freelancer;
-    address [] public arbitrators;
+    //address [] public arbitrators;
     uint256 public totalPayment;
     string public projectDescription;
     string public completionMessage;
