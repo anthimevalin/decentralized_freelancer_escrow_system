@@ -38,10 +38,10 @@ contract FreelancerEscrow {
 
     event DisputeRaised(uint256 indexed id, address indexed raisedBy, EscrowState state, string message);
     event DisputeResolved(uint256 indexed id, address indexed resolvedBy, EscrowState state, string message);
-    event DepositMade(address indexed client, uint256 amount);
-    event DeliverableCompleted(address indexed freelancer, string message);
+    event DepositMade(address indexed client, address indexed freelancer, uint256 amount);
+    event DeliverableCompleted(address indexed freelancer, address indexed client, string message);
     event DeliveryConfirmed(address indexed client, address indexed freelancer);
-    event PaymentMade(address indexed freelancer, uint256 amount);
+    event PaymentMade(address indexed freelancer, uint256 amount); //address indexed client????
     event VoteCast(uint256 indexed disputeId, address indexed voter, bool voteForFreelancer, uint256 amount);
 
     constructor(
@@ -66,7 +66,7 @@ contract FreelancerEscrow {
         require(state == EscrowState.AWAITING_DEPOSIT, "Invalid state for this action");
 
         state = EscrowState.AWAITING_DELIVERY;
-        emit DepositMade(client, totalPayment);
+        emit DepositMade(client, freelancer, totalPayment);
     }
 
     function completedDeliverable(string calldata message) external {
@@ -75,7 +75,7 @@ contract FreelancerEscrow {
 
         completionMessage = message;
         state = EscrowState.COMPLETED;
-        emit DeliverableCompleted(freelancer, message);
+        emit DeliverableCompleted(freelancer, client, message);
     }
 
     function confirmDeliveryAndMakePayment() external {

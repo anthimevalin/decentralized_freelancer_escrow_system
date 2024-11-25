@@ -53,7 +53,7 @@ describe("FreelancerEscrow Contract", function () {
         // Verify the event was emitted
         await expect(tx)
             .to.emit(escrow, "DepositMade")
-            .withArgs(client.address, depositAmount);
+            .withArgs(client.address, freelancer.address, depositAmount);
     });
 
     it("Should revert if deposit amount is incorrect", async function () {
@@ -94,7 +94,7 @@ describe("FreelancerEscrow Contract", function () {
         // Verify the event was emitted
         await expect(tx)
             .to.emit(escrow, "DeliverableCompleted")
-            .withArgs(freelancer.address, completionMessage);
+            .withArgs(freelancer.address, client.address, completionMessage);
     });
 
     it("Should revert if deliverable completed is called by someone else", async function () {
