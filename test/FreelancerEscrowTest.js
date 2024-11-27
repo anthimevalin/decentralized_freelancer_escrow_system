@@ -17,9 +17,6 @@ describe("FreelancerEscrow Contract", function () {
         await governanceToken.addArbitrator(arbitrator1.address);
         await governanceToken.addArbitrator(arbitrator2.address);
 
-        await governanceToken.mint(arbitrator1.address, 100);
-        await governanceToken.mint(arbitrator2.address, 200); 
-
         FreelancerEscrow = await ethers.getContractFactory("FreelancerEscrow");
         escrow = await FreelancerEscrow.deploy(client.address, freelancer.address, totalPayment, projectDescription, governanceToken.target);
         await escrow.waitForDeployment();
@@ -217,8 +214,8 @@ describe("FreelancerEscrow Contract", function () {
         const disputeMessage = "The deliverable was not completed as expected";
         await escrow.connect(client).raiseDispute(disputeMessage);
 
-        const votingAmount1 = 50;
-        const votingAmount2 = 100;
+        const votingAmount1 = 1;
+        const votingAmount2 = 1;
     
         // Arbitrator1 approves tokens for voting
         await governanceToken.connect(arbitrator1).approve(escrow.target, votingAmount1);
@@ -242,8 +239,8 @@ describe("FreelancerEscrow Contract", function () {
         // Verify token balance deduction for both arbitrators
         const arbitrator1Balance = await governanceToken.balanceOf(arbitrator1.address);
         const arbitrator2Balance = await governanceToken.balanceOf(arbitrator2.address);
-        expect(arbitrator1Balance).to.equal(100 - votingAmount1); // Arbitrator1 started with 100 tokens
-        expect(arbitrator2Balance).to.equal(200 - votingAmount2); // Arbitrator2 started with 200 tokens
+        expect(arbitrator1Balance).to.equal(10 - votingAmount1); // Arbitrator1 started with 10 tokens
+        expect(arbitrator2Balance).to.equal(10 - votingAmount2); // Arbitrator2 started with 10 tokens
     
         // Verify event emissions for both votes
         await expect(tx1)
@@ -271,7 +268,7 @@ describe("FreelancerEscrow Contract", function () {
         // Add client as an arbitrator in the governance token
         await governanceToken.connect(client).addArbitrator(client.address);
 
-        const votingAmount = 50;
+        const votingAmount = 1;
 
         // Client (as arbitrator) approves tokens for voting
         await governanceToken.connect(client).approve(escrow.target, votingAmount);
@@ -282,8 +279,8 @@ describe("FreelancerEscrow Contract", function () {
         ).to.be.revertedWith("Client and freelancer cannot vote");
 
         // Ensure other arbitrators can still vote
-        const votingAmount1 = 50;
-        const votingAmount2 = 100;
+        const votingAmount1 = 1;
+        const votingAmount2 = 1;
 
         await governanceToken.connect(arbitrator1).approve(escrow.target, votingAmount1);
         await governanceToken.connect(arbitrator2).approve(escrow.target, votingAmount2);
@@ -302,8 +299,8 @@ describe("FreelancerEscrow Contract", function () {
         // Verify token balance deduction for arbitrators
         const arbitrator1Balance = await governanceToken.balanceOf(arbitrator1.address);
         const arbitrator2Balance = await governanceToken.balanceOf(arbitrator2.address);
-        expect(arbitrator1Balance).to.equal(100 - votingAmount1); // Arbitrator1 started with 100 tokens
-        expect(arbitrator2Balance).to.equal(200 - votingAmount2); // Arbitrator2 started with 200 tokens
+        expect(arbitrator1Balance).to.equal(10 - votingAmount1); // Arbitrator1 started with 100 tokens
+        expect(arbitrator2Balance).to.equal(10 - votingAmount2); // Arbitrator2 started with 200 tokens
 
         // Verify event emissions for valid votes
         await expect(tx1)
@@ -313,4 +310,5 @@ describe("FreelancerEscrow Contract", function () {
             .to.emit(escrow, "VoteCast")
             .withArgs(1, arbitrator2.address, false, votingAmount2);
     });
+
 });
