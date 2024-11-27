@@ -12,7 +12,7 @@ contract GovernanceToken is ERC20, Ownable {
 
     constructor() ERC20("GovernanceToken", "GT") Ownable(msg.sender) {}
 
-    function mint(address to, uint256 amount) external onlyOwner {
+    function mint(address to, uint256 amount) external { //onlyOwner
         _mint(to, amount);
     }
 
@@ -32,7 +32,7 @@ contract GovernanceToken is ERC20, Ownable {
         return allArbitrators;
     }
 
-    function addArbitrator(address arbitrator) external onlyOwner {
+    function addArbitrator(address arbitrator) external { //onlyOwner
         require(!arbitrators[arbitrator], "Already an arbitrator");
         arbitrators[arbitrator] = true;
         _mint(arbitrator, 10);
@@ -44,7 +44,7 @@ contract GovernanceToken is ERC20, Ownable {
         arbitrators[arbitrator] = false;
     }
 
-    function increaseReputation(address arbitrator) external onlyOwner {
+    function increaseReputation(address arbitrator) external { //onlyOwner
         require(arbitrators[arbitrator], "Not an arbitrator");
         reputation[arbitrator]++;
     }
@@ -74,4 +74,13 @@ contract GovernanceToken is ERC20, Ownable {
 
         return sample;
     }
+
+    function transfer(address to, uint256 value) public override returns (bool) {
+        // Add custom logic here (e.g., additional validation or event logging)
+        require(balanceOf(msg.sender) >= value, "Insufficient balance");
+
+        // Call the parent contract's implementation
+        return super.transfer(to, value);
+    }
+
 }

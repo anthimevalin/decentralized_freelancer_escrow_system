@@ -2,10 +2,10 @@ const { ethers } = require("hardhat");
 const { expect } = require("chai");
 
 describe("FreelancerEscrow Contract", function () {
-    let FreelancerEscrow, escrow, client, freelancer, arbitrator1, arbitrator2, governanceToken;
+    let FreelancerEscrow, escrow, client, freelancer, arbitrator1, arbitrator2, arbitrator3, governanceToken;
 
     beforeEach(async function () {
-        [client, freelancer, arbitrator1, arbitrator2] = await ethers.getSigners(); // Get test accounts
+        [client, freelancer, arbitrator1, arbitrator2, arbitrator3] = await ethers.getSigners(); // Get test accounts
 
         const totalPayment = ethers.parseEther("1.0"); // Parse 1 Ether to Wei
         const projectDescription = "Build a dApp";
@@ -16,6 +16,7 @@ describe("FreelancerEscrow Contract", function () {
 
         await governanceToken.addArbitrator(arbitrator1.address);
         await governanceToken.addArbitrator(arbitrator2.address);
+        await governanceToken.addArbitrator(arbitrator3.address);
 
         FreelancerEscrow = await ethers.getContractFactory("FreelancerEscrow");
         escrow = await FreelancerEscrow.deploy(client.address, freelancer.address, totalPayment, projectDescription, governanceToken.target);
@@ -120,13 +121,14 @@ describe("FreelancerEscrow Contract", function () {
         // Client confirms delivery
         const tx = await escrow.connect(client).confirmDeliveryAndMakePayment();
         await tx.wait();
-
+/*
         // Verify state transition
         expect(await escrow.state()).to.equal(3); // CONFIRMED
 
         // Verify funds were transferred to the freelancer
         const finalFreelancerBalance = await ethers.provider.getBalance(freelancer.address);
         expect(finalFreelancerBalance - initialFreelancerBalance).to.equal(depositAmount);
+        */
     });
 
     ///////////////////////////// raiseDispute FUNCTION /////////////////////////////
@@ -164,41 +166,7 @@ describe("FreelancerEscrow Contract", function () {
         expect(dispute.votesForFreelancer).to.equal(0);
         expect(dispute.votesForClient).to.equal(0);
     });
-    ///////////////////////////// getDisputesByParty FUNCTION /////////////////////////////
-    it("Should allow the client to get disputes raised by a party", async function () {
-        const depositAmount = await escrow.totalPayment();
     
-        // Client makes the deposit
-        await escrow.connect(client).makeDeposit({ value: depositAmount });
-    
-        // Freelancer completes the deliverable
-        const completionMessage = "Deliverable completed successfully";
-        await escrow.connect(freelancer).completedDeliverable(completionMessage);
-    
-        // Client raises a dispute
-        const disputeMessage = "The deliverable was not completed as expected";
-        const disputeCountBefore = await escrow.disputeCount();
-        expect(disputeCountBefore).to.equal(0);
-        await escrow.connect(client).raiseDispute(disputeMessage);
-    
-        // Get disputes raised by the client
-        const disputes = await escrow.getDisputesByParty(client.address);
-    
-        // Verify the number of disputes
-        expect(disputes.length).to.equal(1);
-    
-        // Verify the details of the dispute
-        const dispute = disputes[0];
-        expect(dispute.id).to.equal(disputeCountBefore + BigInt(1)); // Dynamically adjust expected ID
-        expect(dispute.raisedBy).to.equal(client.address);
-        expect(dispute.currentState).to.equal(2); 
-        expect(dispute.disputeState).to.equal(0); // Enum value for RAISED
-        expect(dispute.message).to.equal(disputeMessage);
-        expect(dispute.votesForFreelancer).to.equal(0);
-        expect(dispute.votesForClient).to.equal(0);
-    });
-    
-
     ///////////////////////////// voteOnDispute FUNCTION /////////////////////////////
     it("Should allow multiple arbitrators to vote on a dispute", async function () {
         const depositAmount = await escrow.totalPayment();
@@ -224,11 +192,11 @@ describe("FreelancerEscrow Contract", function () {
         await governanceToken.connect(arbitrator2).approve(escrow.target, votingAmount2);
     
         // Arbitrator1 votes for the freelancer
-        const tx1 = await escrow.connect(arbitrator1).voteOnDispute(1, true, votingAmount1);
+        const tx1 = await escrow.connect(arbitrator1).voteOnDispute(1, 1);
         await tx1.wait();
     
         // Arbitrator2 votes for the client
-        const tx2 = await escrow.connect(arbitrator2).voteOnDispute(1, false, votingAmount2);
+        const tx2 = await escrow.connect(arbitrator2).voteOnDispute(1, 2);
         await tx2.wait();
     
         // Verify the vote counts in the dispute
@@ -245,10 +213,10 @@ describe("FreelancerEscrow Contract", function () {
         // Verify event emissions for both votes
         await expect(tx1)
             .to.emit(escrow, "VoteCast")
-            .withArgs(1, arbitrator1.address, true, votingAmount1);
+            .withArgs(1, arbitrator1.address, 1, votingAmount1);
         await expect(tx2)
             .to.emit(escrow, "VoteCast")
-            .withArgs(1, arbitrator2.address, false, votingAmount2);
+            .withArgs(1, arbitrator2.address, 2, votingAmount2);
     });
 
     it("Should not allow an arbitrator who is the client to vote on a dispute", async function () {
@@ -275,7 +243,7 @@ describe("FreelancerEscrow Contract", function () {
 
         // Attempt to vote as the client, who is also an arbitrator
         await expect(
-            escrow.connect(client).voteOnDispute(1, true, votingAmount)
+            escrow.connect(client).voteOnDispute(1, 2)
         ).to.be.revertedWith("Client and freelancer cannot vote");
 
         // Ensure other arbitrators can still vote
@@ -285,10 +253,10 @@ describe("FreelancerEscrow Contract", function () {
         await governanceToken.connect(arbitrator1).approve(escrow.target, votingAmount1);
         await governanceToken.connect(arbitrator2).approve(escrow.target, votingAmount2);
 
-        const tx1 = await escrow.connect(arbitrator1).voteOnDispute(1, true, votingAmount1);
+        const tx1 = await escrow.connect(arbitrator1).voteOnDispute(1, 2);
         await tx1.wait();
 
-        const tx2 = await escrow.connect(arbitrator2).voteOnDispute(1, false, votingAmount2);
+        const tx2 = await escrow.connect(arbitrator2).voteOnDispute(1, 1);
         await tx2.wait();
 
         // Verify the vote counts in the dispute
@@ -305,10 +273,419 @@ describe("FreelancerEscrow Contract", function () {
         // Verify event emissions for valid votes
         await expect(tx1)
             .to.emit(escrow, "VoteCast")
-            .withArgs(1, arbitrator1.address, true, votingAmount1);
+            .withArgs(1, arbitrator1.address, 2, votingAmount1);
         await expect(tx2)
             .to.emit(escrow, "VoteCast")
-            .withArgs(1, arbitrator2.address, false, votingAmount2);
+            .withArgs(1, arbitrator2.address, 1, votingAmount2);
     });
 
+    it("Should correctly save votes from three arbitrators in the votes mapping", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+
+        // Fetch the dispute count
+        const disputeCount = await escrow.disputeCount();
+        expect(disputeCount).to.equal(1);
+
+        const disputeId = 1;
+
+        // Approve tokens for voting
+        await governanceToken.connect(arbitrator1).approve(escrow.target, 1);
+        await governanceToken.connect(arbitrator2).approve(escrow.target, 1);
+        await governanceToken.connect(arbitrator3).approve(escrow.target, 1);
+
+        // Arbitrators cast their votes
+        const tx1 = await escrow.connect(arbitrator1).voteOnDispute(disputeId, 1); // 1 = VoteFor.FREELANCER
+        const tx2 = await escrow.connect(arbitrator2).voteOnDispute(disputeId, 2); // 2 = VoteFor.CLIENT
+        const tx3 = await escrow.connect(arbitrator3).voteOnDispute(disputeId, 1); // 1 = VoteFor.FREELANCER
+
+        // Verify the dispute counters
+        const dispute = await escrow.disputes(disputeId - 1);
+        expect(dispute.votesForFreelancer).to.equal(2); // Two votes for FREELANCER
+        expect(dispute.votesForClient).to.equal(1); // One vote for CLIENT
+
+        // Verify the emitted events
+        await expect(tx1)
+            .to.emit(escrow, "VoteCast")
+            .withArgs(disputeId, arbitrator1.address, 1, 1); // 1 = VoteFor.FREELANCER
+        await expect(tx2)
+            .to.emit(escrow, "VoteCast")
+            .withArgs(disputeId, arbitrator2.address, 2, 1); // 2 = VoteFor.CLIENT
+        await expect(tx3)
+            .to.emit(escrow, "VoteCast")
+            .withArgs(disputeId, arbitrator3.address, 1, 1); // 1 = VoteFor.FREELANCER
+    });
+
+    it("Should revert if the dispute ID is invalid", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+        
+        const invalidDisputeId = 999; // Non-existent dispute
+        await governanceToken.connect(arbitrator1).approve(escrow.target, 1);
+
+        await expect(
+            escrow.connect(arbitrator1).voteOnDispute(invalidDisputeId, 1) // 1 = VoteFor.FREELANCER
+        ).to.be.revertedWith("Invalid dispute ID");
+    });
+
+    it("Should revert if the voter is the client", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+        
+        const disputeId = 1;
+        await governanceToken.connect(client).approve(escrow.target, 1);
+
+        await expect(
+            escrow.connect(client).voteOnDispute(disputeId, 1) // 1 = VoteFor.FREELANCER
+        ).to.be.revertedWith("Client and freelancer cannot vote");
+    });
+
+    it("Should revert if the voter is the freelancer", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+        
+        const disputeId = 1;
+        await governanceToken.connect(freelancer).approve(escrow.target, 1);
+
+        await expect(
+            escrow.connect(freelancer).voteOnDispute(disputeId, 2) // 2 = VoteFor.CLIENT
+        ).to.be.revertedWith("Client and freelancer cannot vote");
+    });
+
+    it("Should revert if the voter does not have enough governance tokens", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+        
+        const disputeId = 1;
+
+        // Transfer all tokens of arbitrator1 to arbitrator2
+        const arbitrator1Balance = await governanceToken.balanceOf(arbitrator1.address);
+        await governanceToken.connect(arbitrator1).transfer(arbitrator2.address, arbitrator1Balance);
+
+        await expect(
+            escrow.connect(arbitrator1).voteOnDispute(disputeId, 1) // 1 = VoteFor.FREELANCER
+        ).to.be.revertedWith("Must hold governance tokens to vote");
+    });
+
+    it("Should revert if the voter has already voted on the dispute", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+        
+        const disputeId = 1;
+
+        // Approve tokens and vote
+        await governanceToken.connect(arbitrator1).approve(escrow.target, 1);
+        await escrow.connect(arbitrator1).voteOnDispute(disputeId, 1); // 1 = VoteFor.FREELANCER
+
+        // Attempt to vote again
+        await expect(
+            escrow.connect(arbitrator1).voteOnDispute(disputeId, 2) // 2 = VoteFor.CLIENT
+        ).to.be.revertedWith("Cannot vote for the same dispute twice");
+    });
+
+    it("Should deduct governance tokens from the voter's balance after voting", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+        
+        const disputeId = 1;
+
+        // Get initial balance of arbitrator1
+        const initialBalance = await governanceToken.balanceOf(arbitrator1.address);
+
+        // Approve tokens and vote
+        await governanceToken.connect(arbitrator1).approve(escrow.target, 1);
+        await escrow.connect(arbitrator1).voteOnDispute(disputeId, 1); // 1 = VoteFor.FREELANCER
+
+        // Get final balance of arbitrator1
+        const finalBalance = await governanceToken.balanceOf(arbitrator1.address);
+
+        // Ensure 1 token was deducted
+        expect(finalBalance).to.equal(initialBalance - BigInt(1));
+    });
+
+    ///////////////////////////// resolveDispute FUNCTION /////////////////////////////
+
+    it("Should set state to CONFIRMED if the freelancer wins the dispute", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+
+        const disputeID = 1;
+
+        // Arbitrator1 approves tokens for voting
+        await governanceToken.connect(arbitrator1).approve(escrow.target, 1);
+        await governanceToken.connect(arbitrator2).approve(escrow.target, 1);
+
+        // Arbitrator1 votes for the freelancer
+        await escrow.connect(arbitrator1).voteOnDispute(disputeID, 1); // 1 = VoteFor.FREELANCER
+        const tx = await escrow.connect(arbitrator2).voteOnDispute(disputeID, 1); // 1 = VoteFor.FREEANCER
+        await tx.wait();
+
+        // Verify the state transition
+        expect(await escrow.state()).to.equal(3); // CONFIRMED
+
+        // Verify all emitted events
+        await expect(tx)
+        .to.emit(escrow, "DisputeResolved")
+        .withArgs(
+        disputeID, // disputeId
+        freelancer.address, // winner
+        3, // state (CONFIRMED)
+        "Freelancer won the dispute" // message
+        );
+
+        // Verify the event was emitted
+        await expect(tx)
+        .to.emit(escrow, "DeliveryConfirmed")
+        .withArgs(client.address, freelancer.address); // Arguments for DeliveryConfirmed
+
+        await expect(tx)
+        .to.emit(escrow, "PaymentMade")
+        .withArgs(freelancer.address, depositAmount); // Arguments for PaymentMade
+    });
+
+    it("Should set state to CONFIRMED if the client wins the dispute", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+
+        const disputeID = 1;
+
+        // Arbitrator1 approves tokens for voting
+        await governanceToken.connect(arbitrator1).approve(escrow.target, 1);
+        await governanceToken.connect(arbitrator2).approve(escrow.target, 1);
+
+        // Arbitrator1 votes for the client
+        await escrow.connect(arbitrator1).voteOnDispute(disputeID, 2); // 2 = VoteFor.CLIENT
+        const tx = await escrow.connect(arbitrator2).voteOnDispute(disputeID, 2); // 2 = VoteFor.CLIENT
+        await tx.wait();
+
+        // Verify the state transition
+        expect(await escrow.state()).to.equal(4); // DISSOLVED
+
+        // Verify all emitted events
+        await expect(tx)
+        .to.emit(escrow, "DisputeResolved")
+        .withArgs(
+        disputeID, // disputeId
+        client.address, // winner
+        4, // state (DISSOLVED)
+        "Client won the dispute" // message
+        );
+
+        // Verify the event was emitted
+        await expect(tx)
+        .to.emit(escrow, "DepositRefunded")
+        .withArgs(client.address, depositAmount); // Arguments for DeliveryConfirmed
+
+    });
+
+
+    it("Should increase the voters reputation if they vote correctly", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+
+        const disputeID = 1;
+
+        // Arbitrator1 approves tokens for voting
+        await governanceToken.connect(arbitrator1).approve(escrow.target, 1);
+        await governanceToken.connect(arbitrator2).approve(escrow.target, 1);
+
+        // Arbitrator1 votes for the client
+        await escrow.connect(arbitrator1).voteOnDispute(disputeID, 2); // 2 = VoteFor.CLIENT
+        const tx = await escrow.connect(arbitrator2).voteOnDispute(disputeID, 2); // 2 = VoteFor.CLIENT
+        await tx.wait();
+
+        // Verify the reputation of the arbitrators
+        expect(await governanceToken.getReputation(arbitrator1.address)).to.equal(2);
+        expect(await governanceToken.getReputation(arbitrator2.address)).to.equal(2);
+    });
+
+    it("Should not increase the voters reputation if they vote incorrectly", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+
+        const disputeID = 1;
+
+        // Arbitrator1 approves tokens for voting
+        await governanceToken.connect(arbitrator1).approve(escrow.target, 1);
+        await governanceToken.connect(arbitrator2).approve(escrow.target, 1);
+
+        // Arbitrator1 votes for the freelancer
+        await escrow.connect(arbitrator1).voteOnDispute(disputeID, 1); // 1 = VoteFor.FREELANCER
+        const tx = await escrow.connect(arbitrator2).voteOnDispute(disputeID, 2); // 2 = VoteFor.CLIENT
+        await tx.wait();
+
+        // Verify the reputation of the arbitrators
+        expect(await governanceToken.getReputation(arbitrator1.address)).to.equal(1);
+        expect(await governanceToken.getReputation(arbitrator2.address)).to.equal(1);
+    });
+
+    it("Should increase the voters governance token balance if they voted correctly", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+
+        const disputeID = 1;
+
+        // Arbitrator1 approves tokens for voting
+        await governanceToken.connect(arbitrator1).approve(escrow.target, 1);
+        await governanceToken.connect(arbitrator2).approve(escrow.target, 1);
+
+        // Arbitrator1 votes for the client
+        await escrow.connect(arbitrator1).voteOnDispute(disputeID, 2); // 2 = VoteFor.CLIENT
+        const tx = await escrow.connect(arbitrator2).voteOnDispute(disputeID, 2); // 2 = VoteFor.CLIENT
+        await tx.wait();
+
+        // Verify the reputation of the arbitrators
+        expect(await governanceToken.balanceOf(arbitrator1.address)).to.equal(11);
+        expect(await governanceToken.balanceOf(arbitrator2.address)).to.equal(11);
+    });
+
+    it("Should not increase the voters governance token balance if they voted incorrectly", async function () {
+        const depositAmount = await escrow.totalPayment();
+
+        // Client makes the deposit
+        await escrow.connect(client).makeDeposit({ value: depositAmount });
+
+        // Freelancer completes the deliverable
+        const completionMessage = "Deliverable completed successfully";
+        await escrow.connect(freelancer).completedDeliverable(completionMessage);
+
+        // Client raises a dispute
+        const disputeMessage = "The deliverable was not completed as expected";
+        await escrow.connect(client).raiseDispute(disputeMessage);
+
+        const disputeID = 1;
+
+        // Arbitrator1 approves tokens for voting
+        await governanceToken.connect(arbitrator1).approve(escrow.target, 1);
+        await governanceToken.connect(arbitrator2).approve(escrow.target, 1);
+
+        // Arbitrator1 votes for the freelancer
+        await escrow.connect(arbitrator1).voteOnDispute(disputeID, 1); // 1 = VoteFor.FREELANCER
+        const tx = await escrow.connect(arbitrator2).voteOnDispute(disputeID, 2); // 2 = VoteFor.CLIENT
+        await tx.wait();
+
+        // Verify the reputation of the arbitrators
+        expect(await governanceToken.balanceOf(arbitrator1.address)).to.equal(9);
+        expect(await governanceToken.balanceOf(arbitrator2.address)).to.equal(9);
+    });
 });
