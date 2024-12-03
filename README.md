@@ -10,6 +10,7 @@ Achieved Milestone
 Next steps
 * Question about how arbitrators get the necessary info to cast a vote --> Request info function and log everything
 * Implement milestones
+* Fees
 * New concept for the voting and governance tokens
 * Have a look at deadlines in the blockchain
 * How should we decide when a vote ends and who participates? -- Randomized arbitrator selection not working, should arbitrators declare their interest in a vote? --> Low reputation only for small contracts and vice versa for large contracts
