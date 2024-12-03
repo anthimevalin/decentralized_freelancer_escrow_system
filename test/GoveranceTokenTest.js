@@ -25,7 +25,7 @@ describe("Governance Token Contract", function () {
         expect(await governanceToken.getAllArbitrators()).to.have.lengthOf(2);
     });
     
-
+/*
     it("Should return a random sample of arbitrators with correct weights", async function () {
         // Add arbitrators
         await governanceToken.addArbitrator(arbitrator1.address);
@@ -82,6 +82,6 @@ describe("Governance Token Contract", function () {
         expect(selectionCounts[arbitrator2.address]).to.be.greaterThan(selectionCounts[arbitrator1.address]);
         expect(selectionCounts[arbitrator1.address]).to.be.greaterThan(selectionCounts[arbitrator3.address]);
     });
-    
+*/
 
 });

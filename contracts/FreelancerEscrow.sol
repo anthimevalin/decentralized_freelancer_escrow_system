@@ -8,16 +8,23 @@ import "hardhat/console.sol";
 contract FreelancerEscrow {
     address public client;
     address public freelancer;
+    address public corp;
     //address [] public arbitrators;
     uint256 public totalPayment;
     string public projectDescription;
     string public completionMessage;
+    uint256 public milestoneCount;
+    uint256 public nextPayment;
+    uint256 public paymentMade;
+    uint256 public commissionRate = 5;
+
+    uint256 public milestoneCompleted;
 
     GovernanceToken public governanceToken;
 
     enum VoteFor { NONE, FREELANCER, CLIENT }
 
-    enum EscrowState { AWAITING_DEPOSIT, AWAITING_DELIVERY, COMPLETED, CONFIRMED, DISSOLVED }
+    enum EscrowState { AWAITING_DEPOSIT, AWAITING_DELIVERABLE, AWAITING_APPROVAL, COMPLETED, CONFIRMED, DISSOLVED }
     EscrowState public state = EscrowState.AWAITING_DEPOSIT;
     
     enum DisputeState { RAISED, RESOLVED }
@@ -49,13 +56,16 @@ contract FreelancerEscrow {
     event PaymentMade(address indexed freelancer, uint256 amount); //address indexed client????
     event VoteCast(uint256 indexed disputeId, address indexed voter, VoteFor newVote, uint256 amount);
     event DepositRefunded(address indexed client, uint256 amount);
+    event MilestoneCompleted(address indexed freelancer, address indexed client, string message);
+    event MilestoneConfirmed(address indexed client, address indexed freelancer, uint256 amount);
 
     constructor(
         address _client,
         address _freelancer,
         uint256 _totalPayment,
         string memory _projectDescription,
-        address _governanceToken
+        address _governanceToken,
+        uint256 _milestoneCount
     ) {
         require(_totalPayment > 0, "Amount must be greater than zero");
         client = _client;
@@ -63,41 +73,78 @@ contract FreelancerEscrow {
         totalPayment = _totalPayment;
         projectDescription = _projectDescription;
         governanceToken = GovernanceToken(_governanceToken);
+        milestoneCount = _milestoneCount;
+        nextPayment = 0;
+        paymentMade = 0;
+        milestoneCompleted = 0;
+        corp = 0x4F259744634C65F2e2cFe70bAF3C0EA04640631b;
     }
 
-    function makeDeposit() external payable {
+
+    function makeDeposit(uint256 depositAmount) external payable {
         require(msg.sender == client, "Only client can perform this action");
-        require(msg.value == totalPayment, "Incorrect payment amount");
         require(state == EscrowState.AWAITING_DEPOSIT, "Invalid state for this action");
 
-        state = EscrowState.AWAITING_DELIVERY;
-        emit DepositMade(client, freelancer, totalPayment);
+        if (milestoneCompleted == milestoneCount) {
+            depositAmount = (totalPayment - paymentMade);
+        }
+
+        // Calculate the commission fee
+        uint256 commissionFee = depositAmount * commissionRate / 100;
+
+        // Calculate the total payment required
+        uint256 requiredPayment = depositAmount + commissionFee;
+
+        // Ensure the client has sent the correct total payment
+        require(msg.value == requiredPayment, "Incorrect payment amount");
+
+        // Update contract state and emit event
+        state = EscrowState.AWAITING_DELIVERABLE;
+        nextPayment = depositAmount;
+
+        emit DepositMade(client, freelancer, depositAmount);
     }
 
-    function completedDeliverable(string calldata message) external {
+    function completedMilestone(string calldata message) external {
         require(msg.sender == freelancer, "Only freelancer can perform this action");
-        require(state == EscrowState.AWAITING_DELIVERY, "Invalid state for this action");
+        require(state == EscrowState.AWAITING_DELIVERABLE, "Invalid state for this action");
 
         completionMessage = message;
-        state = EscrowState.COMPLETED;
-        emit DeliverableCompleted(freelancer, client, message);
+        
+        
+
+        if (milestoneCompleted == milestoneCount) {
+            state = EscrowState.COMPLETED;
+            emit DeliverableCompleted(freelancer, client, message);
+        } else {
+            state = EscrowState.AWAITING_APPROVAL;
+            emit MilestoneCompleted(freelancer, client, message);
+        }
+        milestoneCompleted++;
     }
 
-    function confirmDeliveryAndMakePayment() external {
+    function confirmMilestoneAndMakePayment() external {
         require(msg.sender == client || msg.sender == address(this), "Only client can perform this action");
-        require(state == EscrowState.COMPLETED, "Invalid state for this action");
+        require(state == EscrowState.COMPLETED || state == EscrowState.AWAITING_APPROVAL, "Invalid state for this action");
 
         // Transfer funds to the freelancer
-        payable(freelancer).transfer(totalPayment);
-
-        state = EscrowState.CONFIRMED;
-
-        emit DeliveryConfirmed(client, freelancer);
+        payable(freelancer).transfer(nextPayment);
         emit PaymentMade(freelancer, totalPayment);
+        paymentMade += nextPayment;
 
-        // Transfer governance tokens to the client and freelancer
-        governanceToken.addArbitrator(client);
-        governanceToken.addArbitrator(freelancer);
+        if (state == EscrowState.COMPLETED) {
+            state = EscrowState.CONFIRMED;
+            emit DeliveryConfirmed(client, freelancer);
+            payable(corp).transfer(address(this).balance);
+
+            // Transfer governance tokens to the client and freelancer -- only adds tokens for the first conctract
+            governanceToken.addArbitrator(client);
+            governanceToken.addArbitrator(freelancer);
+        } else {
+            state = EscrowState.AWAITING_DEPOSIT;
+            emit MilestoneConfirmed(client, freelancer, nextPayment);
+            payable(corp).transfer(address(this).balance);
+        }
     }
 
     // Check if an address is an arbitrator in the dispute
@@ -133,20 +180,6 @@ contract FreelancerEscrow {
         emit DisputeRaised(disputeCount, msg.sender, state, message);
     }
 
-    /*
-    function getDisputesByParty(address party) external view returns (Dispute[] memory) {
-        require(msg.sender == client || msg.sender == freelancer || isArbitrator(msg.sender), "Only client, freelancer, or arbitrator can perform this action");
-        uint256[] memory disputeIds = disputesByParty[party]; // Get dispute IDs for the party
-        Dispute[] memory result = new Dispute[](disputeIds.length); // Create a temporary array in memory
-
-        for (uint256 i = 0; i < disputeIds.length; i++) {
-            result[i] = disputes[disputeIds[i] - 1]; // Look up each dispute by its ID
-        }
-
-        return result; // Return the array of disputes
-    }
-    */
-
     // Function to vote on a dispute
     function voteOnDispute(uint256 disputeId, VoteFor newVote) external {
         require(disputeId > 0 && disputeId <= disputeCount, "Invalid dispute ID");
@@ -173,7 +206,8 @@ contract FreelancerEscrow {
 
         emit VoteCast(disputeId, msg.sender, newVote, 1);
 
-        if (dispute.votesForFreelancer > dispute.sampleSize / 2 || dispute.votesForClient > dispute.sampleSize / 2) {
+        // As soon as 25% of the arbitrators have voted for one party, the dispute is resolved
+        if (dispute.votesForFreelancer > dispute.sampleSize / 4 || dispute.votesForClient > dispute.sampleSize / 4) {
             resolveDispute(disputeId);
         }
     }
@@ -181,26 +215,25 @@ contract FreelancerEscrow {
     function resolveDispute (uint256 disputeId) internal {
         require(disputeId > 0 && disputeId <= disputeCount, "Invalid dispute ID");
         
-        require(address(this).balance >= totalPayment, "Insufficient contract balance");
+        require(address(this).balance >= nextPayment, "Insufficient contract balance");
 
         Dispute storage dispute = disputes[disputeId - 1];
+
+        // Give arbitrators money
 
         if (dispute.votesForFreelancer >= dispute.sampleSize / 2) {
             state = EscrowState.CONFIRMED;
             emit DisputeResolved(disputeId, freelancer, state, "Freelancer won the dispute");
 
             // Transfer funds to the freelancer
-            payable(freelancer).transfer(totalPayment);
+            payable(freelancer).transfer(nextPayment);
 
             emit DeliveryConfirmed(client, freelancer);
-            emit PaymentMade(freelancer, totalPayment);
+            emit PaymentMade(freelancer, nextPayment);
 
             // Transfer governance tokens to the arbitrators that voted for the freelancer#
             for (uint256 i = 0; i < dispute.arbitrators.length; i++) {
-                if (dispute.votes[dispute.arbitrators[i]] == VoteFor.FREELANCER) {
-                    governanceToken.mint(dispute.arbitrators[i], 2);
-                    governanceToken.increaseReputation(dispute.arbitrators[i]);
-                }
+                governanceToken.mint(dispute.arbitrators[i], 1);
             }
 
         } else {
@@ -208,16 +241,13 @@ contract FreelancerEscrow {
             emit DisputeResolved(disputeId, client, state, "Client won the dispute");
 
             // Transfer funds back to the client
-            payable(client).transfer(totalPayment);
+            payable(client).transfer(nextPayment);
 
             emit DepositRefunded(client, totalPayment);
 
             // Transfer governance tokens to the arbitrators that voted for the freelancer#
             for (uint256 i = 0; i < dispute.arbitrators.length; i++) {
-                if (dispute.votes[dispute.arbitrators[i]] == VoteFor.CLIENT) {
-                    governanceToken.mint(dispute.arbitrators[i], 2);
-                    governanceToken.increaseReputation(dispute.arbitrators[i]);
-                }
+                governanceToken.mint(dispute.arbitrators[i], 2);
             }
         }
         dispute.disputeState = DisputeState.RESOLVED;

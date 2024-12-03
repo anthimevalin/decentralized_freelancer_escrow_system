@@ -35,7 +35,7 @@ contract GovernanceToken is ERC20, Ownable {
     function addArbitrator(address arbitrator) external { //onlyOwner
         require(!arbitrators[arbitrator], "Already an arbitrator");
         arbitrators[arbitrator] = true;
-        _mint(arbitrator, 10);
+        _mint(arbitrator, 1);
         reputation[arbitrator] = 1;
         allArbitrators.push(arbitrator);
     }
