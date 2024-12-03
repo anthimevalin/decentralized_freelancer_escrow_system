@@ -111,7 +111,6 @@ contract FreelancerEscrow {
 
         completionMessage = message;
         
-        
 
         if (milestoneCompleted == milestoneCount) {
             state = EscrowState.COMPLETED;
@@ -206,8 +205,8 @@ contract FreelancerEscrow {
 
         emit VoteCast(disputeId, msg.sender, newVote, 1);
 
-        // As soon as 25% of the arbitrators have voted for one party, the dispute is resolved
-        if (dispute.votesForFreelancer > dispute.sampleSize / 4 || dispute.votesForClient > dispute.sampleSize / 4) {
+        // As soon as 50% of the arbitrators have voted for one party, the dispute is resolved
+        if (dispute.votesForFreelancer >= dispute.sampleSize / 2 || dispute.votesForClient >= dispute.sampleSize / 2) {
             resolveDispute(disputeId);
         }
     }
@@ -219,8 +218,6 @@ contract FreelancerEscrow {
 
         Dispute storage dispute = disputes[disputeId - 1];
 
-        // Give arbitrators money
-
         if (dispute.votesForFreelancer >= dispute.sampleSize / 2) {
             state = EscrowState.CONFIRMED;
             emit DisputeResolved(disputeId, freelancer, state, "Freelancer won the dispute");
@@ -231,11 +228,6 @@ contract FreelancerEscrow {
             emit DeliveryConfirmed(client, freelancer);
             emit PaymentMade(freelancer, nextPayment);
 
-            // Transfer governance tokens to the arbitrators that voted for the freelancer#
-            for (uint256 i = 0; i < dispute.arbitrators.length; i++) {
-                governanceToken.mint(dispute.arbitrators[i], 1);
-            }
-
         } else {
             state = EscrowState.DISSOLVED;
             emit DisputeResolved(disputeId, client, state, "Client won the dispute");
@@ -245,13 +237,26 @@ contract FreelancerEscrow {
 
             emit DepositRefunded(client, totalPayment);
 
-            // Transfer governance tokens to the arbitrators that voted for the freelancer#
-            for (uint256 i = 0; i < dispute.arbitrators.length; i++) {
-                governanceToken.mint(dispute.arbitrators[i], 2);
+        }
+        // Give arbitrators money and token back
+        uint256 votersCount = 0;
+        for (uint256 i = 0; i < dispute.arbitrators.length; i++) {
+            if (dispute.votes[dispute.arbitrators[i]] != VoteFor.NONE) {
+                votersCount++;
             }
         }
         dispute.disputeState = DisputeState.RESOLVED;
+        uint256 arbitrator_commission = (address(this).balance / votersCount) / 2;
 
+        // Transfer governance tokens and comission to the arbitrators that voted for the freelancer#
+        for (uint256 i = 0; i < dispute.arbitrators.length; i++) {
+            if (dispute.votes[dispute.arbitrators[i]] != VoteFor.NONE) {
+                governanceToken.transfer(dispute.arbitrators[i], 1);
+                governanceToken.mint(dispute.arbitrators[i], 1);
+                payable(dispute.arbitrators[i]).transfer(arbitrator_commission);
+            }
+        }
+        payable(corp).transfer(address(this).balance);
     }
 
 }

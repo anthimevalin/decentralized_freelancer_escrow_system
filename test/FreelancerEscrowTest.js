@@ -2,10 +2,10 @@ const { ethers } = require("hardhat");
 const { expect } = require("chai");
 
 describe("FreelancerEscrow Contract", function () {
-    let FreelancerEscrow, escrow, client, freelancer, arbitrator1, arbitrator2, arbitrator3, arbitrator4, arbitrator5, governanceToken;
+    let FreelancerEscrow, escrow, client, freelancer, arbitrator1, arbitrator2, arbitrator3, arbitrator4, arbitrator5, arbitrator6, governanceToken;
 
     beforeEach(async function () {
-        [client, freelancer, arbitrator1, arbitrator2, arbitrator3, arbitrator4, arbitrator5] = await ethers.getSigners(); // Get test accounts
+        [client, freelancer, arbitrator1, arbitrator2, arbitrator3, arbitrator4, arbitrator5, arbitrator6] = await ethers.getSigners(); // Get test accounts
 
         const totalPayment = ethers.parseEther("1.0"); // Parse 1 Ether to Wei
         const projectDescription = "Build a dApp";
@@ -20,7 +20,8 @@ describe("FreelancerEscrow Contract", function () {
         await governanceToken.addArbitrator(arbitrator3.address);
         await governanceToken.addArbitrator(arbitrator4.address);
         await governanceToken.addArbitrator(arbitrator5.address);
-
+        await governanceToken.addArbitrator(arbitrator6.address);
+        
         FreelancerEscrow = await ethers.getContractFactory("FreelancerEscrow");
         escrow = await FreelancerEscrow.deploy(client.address, freelancer.address, totalPayment, projectDescription, governanceToken.target, milestoneCount);
         await escrow.waitForDeployment();
@@ -477,13 +478,15 @@ describe("FreelancerEscrow Contract", function () {
     });
 
 
-    ///////////////////////////// voteOnDispute FUNCTION /////////////////////////////
-    it("Should allow multiple arbitrators to vote on a dispute", async function () {
+    ///////////////////////////// voteOnDispute and resolveDispute FUNCTION /////////////////////////////
+    it("Should allow multiple arbitrators to vote on a dispute and resolve", async function () {
+        const initialCorpBalance = await ethers.provider.getBalance(escrow.corp());
+
         const depositAmount = ethers.parseEther("0.4");
         const expectedCommission = depositAmount * BigInt(5) / BigInt(100); // 5% commission
         const requiredPayment = depositAmount + expectedCommission;
         await escrow.connect(client).makeDeposit(depositAmount, { value: requiredPayment })
-    
+
         // Freelancer completes the deliverable
         const completionMessage = "Deliverable completed successfully";
         await escrow.connect(freelancer).completedMilestone(completionMessage);
@@ -492,40 +495,95 @@ describe("FreelancerEscrow Contract", function () {
         const disputeMessage = "The deliverable was not completed as expected";
         await escrow.connect(client).raiseDispute(disputeMessage);
 
-        const votingAmount1 = 1;
-        const votingAmount2 = 1;
+        const votingAmount = 1;
     
-        // Arbitrator1 approves tokens for voting
-        await governanceToken.connect(arbitrator1).approve(escrow.target, votingAmount1);
-    
-        // Arbitrator2 approves tokens for voting
-        await governanceToken.connect(arbitrator2).approve(escrow.target, votingAmount2);
-    
-        // Arbitrator1 votes for the freelancer
+        // Arbitrator approves tokens for voting
+        await governanceToken.connect(arbitrator1).approve(escrow.target, votingAmount);
+        await governanceToken.connect(arbitrator2).approve(escrow.target, votingAmount);
+        await governanceToken.connect(arbitrator3).approve(escrow.target, votingAmount);
+        await governanceToken.connect(arbitrator4).approve(escrow.target, votingAmount);
+        await governanceToken.connect(arbitrator5).approve(escrow.target, votingAmount);
+        await governanceToken.connect(arbitrator6).approve(escrow.target, votingAmount);
+
+        // check balances of arbitrators before and after resolution
+        const initial_balance_arbitrator1 = await  ethers.provider.getBalance(arbitrator1.address);
+        const initial_balance_arbitrator2 = await  ethers.provider.getBalance(arbitrator2.address);
+        const initial_balance_arbitrator3 = await  ethers.provider.getBalance(arbitrator3.address);
+        const initial_balance_arbitrator4 = await  ethers.provider.getBalance(arbitrator4.address);
+        const initial_balance_arbitrator5 = await  ethers.provider.getBalance(arbitrator5.address);
+        const initial_balance_arbitrator6 = await  ethers.provider.getBalance(arbitrator6.address);
+        const initial_escrowBalance = await ethers.provider.getBalance(escrow.target);
+
+        // Arbitrators 1 and 3 and 5 votes for the freelancer and arbitrators 2 and 4 vote for client
         const tx1 = await escrow.connect(arbitrator1).voteOnDispute(1, 1);
         await tx1.wait();
-    
-        // Arbitrator2 votes for the client
         const tx2 = await escrow.connect(arbitrator2).voteOnDispute(1, 2);
         await tx2.wait();
-    
+        const tx3 = await escrow.connect(arbitrator3).voteOnDispute(1, 1);
+        await tx3.wait();
+        const tx4 = await escrow.connect(arbitrator4).voteOnDispute(1, 2);
+        await tx4.wait();
+        const tx5 = await escrow.connect(arbitrator5).voteOnDispute(1, 1);
+        await tx5.wait();
+        
+
         // Verify the vote counts in the dispute
         const dispute = await escrow.disputes(0); // Dispute IDs are 1-based; array is 0-based
-        expect(dispute.votesForFreelancer).to.equal(votingAmount1);
-        expect(dispute.votesForClient).to.equal(votingAmount2);
+        expect(dispute.votesForFreelancer).to.equal(3);
+        expect(dispute.votesForClient).to.equal(2);
     
-        // Verify token balance deduction for both arbitrators
+        // Verify token balance for arbitrators
         const arbitrator1Balance = await governanceToken.balanceOf(arbitrator1.address);
         const arbitrator2Balance = await governanceToken.balanceOf(arbitrator2.address);
-        expect(arbitrator1Balance).to.equal(10 - votingAmount1); // Arbitrator1 started with 10 tokens
-        expect(arbitrator2Balance).to.equal(10 - votingAmount2); // Arbitrator2 started with 10 tokens
+        const arbitrator3Balance = await governanceToken.balanceOf(arbitrator3.address);
+        const arbitrator4Balance = await governanceToken.balanceOf(arbitrator4.address);
+        const arbitrator5Balance = await governanceToken.balanceOf(arbitrator5.address);
+        const arbitrator6Balance = await governanceToken.balanceOf(arbitrator6.address);
+
+        expect(arbitrator1Balance).to.equal(2); 
+        expect(arbitrator2Balance).to.equal(2);
+        expect(arbitrator3Balance).to.equal(2); 
+        expect(arbitrator4Balance).to.equal(2); 
+        expect(arbitrator5Balance).to.equal(2); 
+        expect(arbitrator6Balance).to.equal(1);  
     
+        // check balances of arbitrators before and after resolution
+        const final_balance_arbitrator1 = await ethers.provider.getBalance(arbitrator1.address);
+        const final_balance_arbitrator2 = await ethers.provider.getBalance(arbitrator2.address);
+        const final_balance_arbitrator3 = await ethers.provider.getBalance(arbitrator3.address);
+        const final_balance_arbitrator4 = await ethers.provider.getBalance(arbitrator4.address);
+        const final_balance_arbitrator5 = await ethers.provider.getBalance(arbitrator5.address);
+        const final_balance_arbitrator6 = await ethers.provider.getBalance(arbitrator6.address);
+        const final_balance_escrow = await ethers.provider.getBalance(escrow.target);
+        
+        expect((final_balance_arbitrator1) > (initial_balance_arbitrator1));
+        expect((final_balance_arbitrator2) > (initial_balance_arbitrator2));
+        expect((final_balance_arbitrator3) > (initial_balance_arbitrator3));
+        expect((final_balance_arbitrator4) > (initial_balance_arbitrator4));
+        expect((final_balance_arbitrator5) > (initial_balance_arbitrator5));
+        expect((final_balance_arbitrator6 - initial_balance_arbitrator6) == (initial_balance_arbitrator6));
+        //console.log("final_balance_arbitrator1", ethers.formatEther(final_balance_arbitrator1 - initial_balance_arbitrator1));
+
+        const finalCorpBalance = await ethers.provider.getBalance(escrow.corp());
+        expect((finalCorpBalance) > (initialCorpBalance));
+        
+        expect((final_balance_escrow) == 0);
+
         // Verify event emissions for both votes
         await expect(tx1)
             .to.emit(escrow, "VoteCast")
-            .withArgs(1, arbitrator1.address, 1, votingAmount1);
+            .withArgs(1, arbitrator1.address, 1, votingAmount);
         await expect(tx2)
             .to.emit(escrow, "VoteCast")
-            .withArgs(1, arbitrator2.address, 2, votingAmount2);
+            .withArgs(1, arbitrator2.address, 2, votingAmount);
+        await expect(tx3)
+            .to.emit(escrow, "VoteCast")
+            .withArgs(1, arbitrator3.address, 1, votingAmount);
+        await expect(tx4)
+            .to.emit(escrow, "VoteCast")
+            .withArgs(1, arbitrator4.address, 2, votingAmount);
+        await expect(tx5)
+            .to.emit(escrow, "VoteCast")
+            .withArgs(1, arbitrator5.address, 1, votingAmount);
     });
 });
