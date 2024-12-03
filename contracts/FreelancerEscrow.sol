@@ -3,6 +3,8 @@ pragma solidity ^0.8.20;
 import "./GovernanceToken.sol";
 
 
+import "hardhat/console.sol";
+
 contract FreelancerEscrow {
     address public client;
     address public freelancer;
@@ -148,8 +150,11 @@ contract FreelancerEscrow {
     // Function to vote on a dispute
     function voteOnDispute(uint256 disputeId, VoteFor newVote) external {
         require(disputeId > 0 && disputeId <= disputeCount, "Invalid dispute ID");
+        
         Dispute storage dispute = disputes[disputeId - 1];
-
+        if (dispute.disputeState == DisputeState.RESOLVED) {
+            return;
+        }
         require(msg.sender != client && msg.sender != freelancer, "Client and freelancer cannot vote");
         require(isArbitrator(msg.sender, disputeId), "Only arbitrators can vote");
         require(dispute.disputeState == DisputeState.RAISED, "Dispute already resolved");
@@ -175,6 +180,9 @@ contract FreelancerEscrow {
 
     function resolveDispute (uint256 disputeId) internal {
         require(disputeId > 0 && disputeId <= disputeCount, "Invalid dispute ID");
+        
+        require(address(this).balance >= totalPayment, "Insufficient contract balance");
+
         Dispute storage dispute = disputes[disputeId - 1];
 
         if (dispute.votesForFreelancer >= dispute.sampleSize / 2) {
@@ -212,6 +220,8 @@ contract FreelancerEscrow {
                 }
             }
         }
+        dispute.disputeState = DisputeState.RESOLVED;
+
     }
 
 }

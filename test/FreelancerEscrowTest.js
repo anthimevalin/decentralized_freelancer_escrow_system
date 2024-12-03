@@ -35,11 +35,32 @@ describe("FreelancerEscrow Contract", function () {
   ///////////////////////////// makeDeposit FUNCTION /////////////////////////////
 
     it("Should allow the client to make a deposit", async function () {
+        /*
+            Should run successfully if:
+                - The client's balance decreases by the deposit amount (including gas fees)
+                - The contract's balance increases by the deposit amount (excluding gas fees)
+                - The contract's state transitions to AWAITING_DELIVERY
+                - The event DepositMade is emitted with the correct arguments
+        */
+
+
         const depositAmount = await escrow.totalPayment();
+
+        // initial balance of the client
+        const initialClientBalance = await ethers.provider.getBalance(client.address);
 
         // Client makes the deposit
         const tx = await escrow.connect(client).makeDeposit({ value: depositAmount });
         await tx.wait(); // Wait for the transaction to be mined
+
+        // client balance after deposit and check
+        const finalClientBalance = await ethers.provider.getBalance(client.address);
+
+        // Define a reasonable range for gas fees (e.g., up to 0.01 ETH)
+        const gasFeeMargin = ethers.parseEther("0.01");
+
+        // expect the client balance to less than deposit amount and greater than deposit amount - gas fee margin
+        expect(((finalClientBalance - initialClientBalance) <=  -depositAmount) && (finalClientBalance - initialClientBalance) >= -depositAmount - gasFeeMargin).to.be.true;
 
         // Verify state transition
         expect(await escrow.state()).to.equal(1); // AWAITING_DELIVERY
@@ -52,9 +73,15 @@ describe("FreelancerEscrow Contract", function () {
         await expect(tx)
             .to.emit(escrow, "DepositMade")
             .withArgs(client.address, freelancer.address, depositAmount);
+    
     });
 
     it("Should revert if deposit amount is incorrect", async function () {
+        /*
+            Should run successfully if:
+                - The contract reverts with the message "Incorrect payment amount"
+        */
+
         const depositAmount = await escrow.totalPayment(); // This will be a BigInt
         const incorrectAmount = depositAmount - ethers.parseEther("0.5")
 
@@ -65,6 +92,11 @@ describe("FreelancerEscrow Contract", function () {
     });
 
     it("Should revert if deposit is made by someone other than the client", async function () {
+        /*
+            Should run successfully if:
+                - The contract reverts with the message "Only client can perform this action"
+        */
+
         const depositAmount = await escrow.totalPayment();
 
         // Attempt to make deposit from a non-client address
@@ -76,6 +108,15 @@ describe("FreelancerEscrow Contract", function () {
 ///////////////////////////// completedDeliverable FUNCTION /////////////////////////////
 
     it("Should allow the freelancer to complete the deliverable with a message", async function () {
+        /*
+            Should run successfully if:
+                - The contract's state transitions to AWAITING_PAYMENT
+                - The completion message is stored correctly
+                - The event DeliverableCompleted is emitted with the correct arguments
+
+        */
+
+
         const depositAmount = await escrow.totalPayment();
         await escrow.connect(client).makeDeposit({ value: depositAmount });
         const completionMessage = "Deliverable completed successfully";
@@ -86,6 +127,7 @@ describe("FreelancerEscrow Contract", function () {
 
         // Verify state transition
         expect(await escrow.state()).to.equal(2); // AWAITING_PAYMENT
+
         // Verify the stored completion message
         expect(await escrow.completionMessage()).to.equal(completionMessage);
 
@@ -96,6 +138,11 @@ describe("FreelancerEscrow Contract", function () {
     });
 
     it("Should revert if deliverable completed is called by someone else", async function () {
+        /*
+            Should run successfully if:
+                - The contract reverts with the message "Only freelancer can perform this action"
+        */
+
         const completionMessage = "Deliverable completed successfully";
 
         // Attempt to complete deliverable from a non-freelancer address
@@ -106,6 +153,15 @@ describe("FreelancerEscrow Contract", function () {
 
     ///////////////////////////// confirmDeliveryAndMakePayment FUNCTION /////////////////////////////
     it("Should allow the client to confirm delivery and transfer funds", async function () {
+        /*
+            Should run successfully if: 
+                - The contract's state transitions to CONFIRMED
+                - The funds are transferred to the freelancer
+                - The event DeliveryConfirmed is emitted with the correct arguments
+                - The event PaymentMade is emitted with the correct arguments
+        */
+
+
         const depositAmount = await escrow.totalPayment();
 
         // Client makes the deposit
@@ -121,14 +177,14 @@ describe("FreelancerEscrow Contract", function () {
         // Client confirms delivery
         const tx = await escrow.connect(client).confirmDeliveryAndMakePayment();
         await tx.wait();
-/*
+
         // Verify state transition
         expect(await escrow.state()).to.equal(3); // CONFIRMED
 
         // Verify funds were transferred to the freelancer
         const finalFreelancerBalance = await ethers.provider.getBalance(freelancer.address);
         expect(finalFreelancerBalance - initialFreelancerBalance).to.equal(depositAmount);
-        */
+        
     });
 
     ///////////////////////////// raiseDispute FUNCTION /////////////////////////////
