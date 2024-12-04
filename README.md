@@ -19,3 +19,9 @@ Next steps
 Comments for the report
 + Info exchange would happen off-chain
 + Ideally, there would be an app as a framework
+
+
+FINAL TEST
++  Arbitrators can only concurrently vote on one dispute for each token they have
++  Log balances after multiple contracts
++  Log governance tokens after multiple contracts
