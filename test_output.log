@@ -1,0 +1,598 @@
+
+
+  FreelancerEscrow
+
+Contract 1:
+
+Client balance: 9989.494706932545486523 ETH
+Freelancer balance: 10009.999873046865048961 ETH
+Corp balance: 0.25 ETH
+Arbitrator 1 ETH balance: 9999.999868470899806964 ETH tokens: 0 Strategy: 0
+Arbitrator 2 ETH balance: 10000.009837573905983121 ETH tokens: 3 Strategy: 1
+Arbitrator 3 ETH balance: 9999.999875476943887936 ETH tokens: 2 Strategy: 2
+Arbitrator 4 ETH balance: 9999.999872829956001968 ETH tokens: 3 Strategy: 0
+Arbitrator 5 ETH balance: 10000.009846732959533717 ETH tokens: 6 Strategy: 1
+Arbitrator 6 ETH balance: 10000.009844085968329471 ETH tokens: 7 Strategy: 2
+Arbitrator 7 ETH balance: 9999.999864888978747673 ETH tokens: 6 Strategy: 0
+Arbitrator 8 ETH balance: 10000.00983879198054888 ETH tokens: 9 Strategy: 1
+Arbitrator 9 ETH balance: 9999.999859594986800306 ETH tokens: 8 Strategy: 2
+Arbitrator 10 ETH balance: 9999.999856947989563927 ETH tokens: 9 Strategy: 0
+Arbitrator 11 ETH balance: 10000.009835650990632246 ETH tokens: 2 Strategy: 1
+Arbitrator 12 ETH balance: 10000.00982820399233115 ETH tokens: 3 Strategy: 2
+Arbitrator 13 ETH balance: 9999.99984900699467849 ETH tokens: 2 Strategy: 0
+Arbitrator 14 ETH balance: 10000.009822909995077759 ETH tokens: 5 Strategy: 1
+Arbitrator 15 ETH balance: 9999.999843712996467812 ETH tokens: 4 Strategy: 2
+Arbitrator 16 ETH balance: 9999.999841065997045314 ETH tokens: 5 Strategy: 0
+Arbitrator 17 ETH balance: 10000.009814968997177598 ETH tokens: 8 Strategy: 1
+Arbitrator 18 ETH balance: 10000.009812321997513249 ETH tokens: 9 Strategy: 2
+Arbitrator 19 ETH balance: 9999.999833124998117438 ETH tokens: 8 Strategy: 0
+Arbitrator 20 ETH balance: 10000.009807027998216315 ETH tokens: 11 Strategy: 1
+Arbitrator 21 ETH balance: 9999.999832630998661048 ETH tokens: 0 Strategy: 2
+Arbitrator 22 ETH balance: 9999.999825183998601472 ETH tokens: 1 Strategy: 0
+Arbitrator 23 ETH balance: 10000.009799086998392696 ETH tokens: 4 Strategy: 1
+Arbitrator 24 ETH balance: 10000.00979643999837152 ETH tokens: 5 Strategy: 2
+Arbitrator 25 ETH balance: 9999.999817242998537944 ETH tokens: 4 Strategy: 0
+Arbitrator 26 ETH balance: 10000.009791145998329168 ETH tokens: 7 Strategy: 1
+Arbitrator 27 ETH balance: 9999.999811948998495592 ETH tokens: 6 Strategy: 2
+Arbitrator 28 ETH balance: 9999.999809301998474416 ETH tokens: 7 Strategy: 0
+Arbitrator 29 ETH balance: 10000.00978320499826564 ETH tokens: 10 Strategy: 1
+Arbitrator 30 ETH balance: 10000.009780557998244464 ETH tokens: 11 Strategy: 2
+Arbitrator 31 ETH balance: 9999.999806160998449288 ETH tokens: 0 Strategy: 0
+Arbitrator 32 ETH balance: 10000.009775263998202112 ETH tokens: 3 Strategy: 1
+Arbitrator 33 ETH balance: 9999.999796066998368536 ETH tokens: 2 Strategy: 2
+Arbitrator 34 ETH balance: 9999.99979341999834736 ETH tokens: 3 Strategy: 0
+Arbitrator 35 ETH balance: 10000.009767322998138584 ETH tokens: 6 Strategy: 1
+Arbitrator 36 ETH balance: 10000.009764675998117408 ETH tokens: 7 Strategy: 2
+Arbitrator 37 ETH balance: 9999.999785478998283832 ETH tokens: 6 Strategy: 0
+Arbitrator 38 ETH balance: 10000.009759381998075056 ETH tokens: 9 Strategy: 1
+Arbitrator 39 ETH balance: 9999.99978018499824148 ETH tokens: 8 Strategy: 2
+Arbitrator 40 ETH balance: 9999.999777537998220304 ETH tokens: 9 Strategy: 0
+Arbitrator 41 ETH balance: 10000.009756240998049928 ETH tokens: 2 Strategy: 1
+Arbitrator 42 ETH balance: 10000.009748793997990352 ETH tokens: 3 Strategy: 2
+Arbitrator 43 ETH balance: 9999.999769596998156776 ETH tokens: 2 Strategy: 0
+Arbitrator 44 ETH balance: 10000.009743499997948 ETH tokens: 5 Strategy: 1
+Arbitrator 45 ETH balance: 9999.999764302998114424 ETH tokens: 4 Strategy: 2
+Arbitrator 46 ETH balance: 9999.999761655998093248 ETH tokens: 5 Strategy: 0
+Arbitrator 47 ETH balance: 10000.009735558997884472 ETH tokens: 8 Strategy: 1
+Arbitrator 48 ETH balance: 10000.009732911997863296 ETH tokens: 9 Strategy: 2
+Arbitrator 49 ETH balance: 9999.99975371499802972 ETH tokens: 8 Strategy: 0
+Arbitrator 50 ETH balance: 10000.00882120999056968 ETH tokens: 11 Strategy: 1
+
+Contract 2:
+
+Client balance: 9978.989413871503142035 ETH
+Freelancer balance: 10019.999746093864033337 ETH
+Corp balance: 0.5 ETH
+Arbitrator 1 ETH balance: 9999.999868470899806964 ETH tokens: 0 Strategy: 0
+Arbitrator 2 ETH balance: 10000.019658047904546913 ETH tokens: 4 Strategy: 1
+Arbitrator 3 ETH balance: 9999.999750953942891752 ETH tokens: 1 Strategy: 2
+Arbitrator 4 ETH balance: 9999.999745659954984608 ETH tokens: 2 Strategy: 0
+Arbitrator 5 ETH balance: 10000.019693465958307581 ETH tokens: 7 Strategy: 1
+Arbitrator 6 ETH balance: 10000.019688171967082159 ETH tokens: 8 Strategy: 2
+Arbitrator 7 ETH balance: 9999.999729777977666785 ETH tokens: 5 Strategy: 0
+Arbitrator 8 ETH balance: 10000.019677583979259216 ETH tokens: 10 Strategy: 1
+Arbitrator 9 ETH balance: 9999.999719189985677066 ETH tokens: 7 Strategy: 2
+Arbitrator 10 ETH balance: 9999.999713895988419511 ETH tokens: 8 Strategy: 0
+Arbitrator 11 ETH balance: 10000.019666501989279054 ETH tokens: 3 Strategy: 1
+Arbitrator 12 ETH balance: 10000.019656407990956782 ETH tokens: 4 Strategy: 2
+Arbitrator 13 ETH balance: 9999.999698013993470546 ETH tokens: 1 Strategy: 0
+Arbitrator 14 ETH balance: 10000.019645819993661039 ETH tokens: 6 Strategy: 1
+Arbitrator 15 ETH balance: 9999.999687425995217516 ETH tokens: 3 Strategy: 2
+Arbitrator 16 ETH balance: 9999.999682131995773842 ETH tokens: 4 Strategy: 0
+Arbitrator 17 ETH balance: 10000.01962993799569735 ETH tokens: 9 Strategy: 1
+Arbitrator 18 ETH balance: 10000.019624643996011825 ETH tokens: 10 Strategy: 2
+Arbitrator 19 ETH balance: 9999.999666249996782438 ETH tokens: 7 Strategy: 0
+Arbitrator 20 ETH balance: 10000.019614055996672539 ETH tokens: 12 Strategy: 1
+Arbitrator 21 ETH balance: 9999.999832630998661048 ETH tokens: 0 Strategy: 2
+Arbitrator 22 ETH balance: 9999.999655167997241344 ETH tokens: 0 Strategy: 0
+Arbitrator 23 ETH balance: 10000.019598173996785392 ETH tokens: 5 Strategy: 1
+Arbitrator 24 ETH balance: 10000.01959287999674304 ETH tokens: 6 Strategy: 2
+Arbitrator 25 ETH balance: 9999.999634485997075888 ETH tokens: 3 Strategy: 0
+Arbitrator 26 ETH balance: 10000.019582291996658336 ETH tokens: 8 Strategy: 1
+Arbitrator 27 ETH balance: 9999.999623897996991184 ETH tokens: 5 Strategy: 2
+Arbitrator 28 ETH balance: 9999.999618603996948832 ETH tokens: 6 Strategy: 0
+Arbitrator 29 ETH balance: 10000.01956640999653128 ETH tokens: 11 Strategy: 1
+Arbitrator 30 ETH balance: 10000.019561115996488928 ETH tokens: 12 Strategy: 2
+Arbitrator 31 ETH balance: 9999.999806160998449288 ETH tokens: 0 Strategy: 0
+Arbitrator 32 ETH balance: 10000.019550527996404224 ETH tokens: 4 Strategy: 1
+Arbitrator 33 ETH balance: 9999.999592133996737072 ETH tokens: 1 Strategy: 2
+Arbitrator 34 ETH balance: 9999.99958683999669472 ETH tokens: 2 Strategy: 0
+Arbitrator 35 ETH balance: 10000.019534645996277168 ETH tokens: 7 Strategy: 1
+Arbitrator 36 ETH balance: 10000.019529351996234816 ETH tokens: 8 Strategy: 2
+Arbitrator 37 ETH balance: 9999.999570957996567664 ETH tokens: 5 Strategy: 0
+Arbitrator 38 ETH balance: 10000.019518763996150112 ETH tokens: 10 Strategy: 1
+Arbitrator 39 ETH balance: 9999.99956036999648296 ETH tokens: 7 Strategy: 2
+Arbitrator 40 ETH balance: 9999.999555075996440608 ETH tokens: 8 Strategy: 0
+Arbitrator 41 ETH balance: 10000.019507681996061456 ETH tokens: 3 Strategy: 1
+Arbitrator 42 ETH balance: 10000.019497587995980704 ETH tokens: 4 Strategy: 2
+Arbitrator 43 ETH balance: 9999.999539193996313552 ETH tokens: 1 Strategy: 0
+Arbitrator 44 ETH balance: 10000.019486999995896 ETH tokens: 6 Strategy: 1
+Arbitrator 45 ETH balance: 9999.999528605996228848 ETH tokens: 3 Strategy: 2
+Arbitrator 46 ETH balance: 9999.999523311996186496 ETH tokens: 4 Strategy: 0
+Arbitrator 47 ETH balance: 10000.019471117995768944 ETH tokens: 9 Strategy: 1
+Arbitrator 48 ETH balance: 10000.019465823995726592 ETH tokens: 10 Strategy: 2
+Arbitrator 49 ETH balance: 9999.99950742999605944 ETH tokens: 7 Strategy: 0
+Arbitrator 50 ETH balance: 10000.01770161998161296 ETH tokens: 12 Strategy: 1
+
+Contract 3:
+
+Client balance: 9968.484120810460797547 ETH
+Freelancer balance: 10029.999619140863017713 ETH
+Corp balance: 0.75 ETH
+Arbitrator 1 ETH balance: 9999.999868470899806964 ETH tokens: 0 Strategy: 0
+Arbitrator 2 ETH balance: 10000.029478521903110705 ETH tokens: 5 Strategy: 1
+Arbitrator 3 ETH balance: 9999.999631230941933968 ETH tokens: 0 Strategy: 2
+Arbitrator 4 ETH balance: 9999.999618489953967248 ETH tokens: 1 Strategy: 0
+Arbitrator 5 ETH balance: 10000.029540198957081445 ETH tokens: 8 Strategy: 1
+Arbitrator 6 ETH balance: 10000.029532257965834847 ETH tokens: 9 Strategy: 2
+Arbitrator 7 ETH balance: 9999.999594666976585897 ETH tokens: 4 Strategy: 0
+Arbitrator 8 ETH balance: 10000.029516375977969552 ETH tokens: 11 Strategy: 1
+Arbitrator 9 ETH balance: 9999.999578784984553826 ETH tokens: 6 Strategy: 2
+Arbitrator 10 ETH balance: 9999.999570843987275095 ETH tokens: 7 Strategy: 0
+Arbitrator 11 ETH balance: 10000.029497352987925862 ETH tokens: 4 Strategy: 1
+Arbitrator 12 ETH balance: 10000.029484611989582414 ETH tokens: 5 Strategy: 2
+Arbitrator 13 ETH balance: 9999.999551820992301002 ETH tokens: 0 Strategy: 0
+Arbitrator 14 ETH balance: 10000.029468729992244319 ETH tokens: 7 Strategy: 1
+Arbitrator 15 ETH balance: 9999.99953113899396722 ETH tokens: 2 Strategy: 2
+Arbitrator 16 ETH balance: 9999.99952319799450237 ETH tokens: 3 Strategy: 0
+Arbitrator 17 ETH balance: 10000.029444906994217102 ETH tokens: 10 Strategy: 1
+Arbitrator 18 ETH balance: 10000.029436965994510401 ETH tokens: 11 Strategy: 2
+Arbitrator 19 ETH balance: 9999.999499374995447438 ETH tokens: 6 Strategy: 0
+Arbitrator 20 ETH balance: 10000.029421083995128763 ETH tokens: 13 Strategy: 1
+Arbitrator 21 ETH balance: 9999.999832630998661048 ETH tokens: 0 Strategy: 2
+Arbitrator 22 ETH balance: 9999.999655167997241344 ETH tokens: 0 Strategy: 0
+Arbitrator 23 ETH balance: 10000.029397260995178088 ETH tokens: 6 Strategy: 1
+Arbitrator 24 ETH balance: 10000.02938931999511456 ETH tokens: 7 Strategy: 2
+Arbitrator 25 ETH balance: 9999.999451728995613832 ETH tokens: 2 Strategy: 0
+Arbitrator 26 ETH balance: 10000.029373437994987504 ETH tokens: 9 Strategy: 1
+Arbitrator 27 ETH balance: 9999.999435846995486776 ETH tokens: 4 Strategy: 2
+Arbitrator 28 ETH balance: 9999.999427905995423248 ETH tokens: 5 Strategy: 0
+Arbitrator 29 ETH balance: 10000.02934961499479692 ETH tokens: 12 Strategy: 1
+Arbitrator 30 ETH balance: 10000.029341673994733392 ETH tokens: 13 Strategy: 2
+Arbitrator 31 ETH balance: 9999.999806160998449288 ETH tokens: 0 Strategy: 0
+Arbitrator 32 ETH balance: 10000.029325791994606336 ETH tokens: 5 Strategy: 1
+Arbitrator 33 ETH balance: 9999.999393000995144008 ETH tokens: 0 Strategy: 2
+Arbitrator 34 ETH balance: 9999.99938025999504208 ETH tokens: 1 Strategy: 0
+Arbitrator 35 ETH balance: 10000.029301968994415752 ETH tokens: 8 Strategy: 1
+Arbitrator 36 ETH balance: 10000.029294027994352224 ETH tokens: 9 Strategy: 2
+Arbitrator 37 ETH balance: 9999.999356436994851496 ETH tokens: 4 Strategy: 0
+Arbitrator 38 ETH balance: 10000.029278145994225168 ETH tokens: 11 Strategy: 1
+Arbitrator 39 ETH balance: 9999.99934055499472444 ETH tokens: 6 Strategy: 2
+Arbitrator 40 ETH balance: 9999.999332613994660912 ETH tokens: 7 Strategy: 0
+Arbitrator 41 ETH balance: 10000.029259122994072984 ETH tokens: 4 Strategy: 1
+Arbitrator 42 ETH balance: 10000.029246381993971056 ETH tokens: 5 Strategy: 2
+Arbitrator 43 ETH balance: 9999.999313590994508728 ETH tokens: 0 Strategy: 0
+Arbitrator 44 ETH balance: 10000.029230499993844 ETH tokens: 7 Strategy: 1
+Arbitrator 45 ETH balance: 9999.999292908994343272 ETH tokens: 2 Strategy: 2
+Arbitrator 46 ETH balance: 9999.999284967994279744 ETH tokens: 3 Strategy: 0
+Arbitrator 47 ETH balance: 10000.029206676993653416 ETH tokens: 10 Strategy: 1
+Arbitrator 48 ETH balance: 10000.029198735993589888 ETH tokens: 11 Strategy: 2
+Arbitrator 49 ETH balance: 9999.99926114499408916 ETH tokens: 6 Strategy: 0
+Arbitrator 50 ETH balance: 10000.02658202997265624 ETH tokens: 13 Strategy: 1
+
+Contract 4:
+
+Client balance: 9957.978827749418453059 ETH
+Freelancer balance: 10039.999492187862002089 ETH
+Corp balance: 1.0 ETH
+Arbitrator 1 ETH balance: 9999.999868470899806964 ETH tokens: 0 Strategy: 0
+Arbitrator 2 ETH balance: 10000.039298995901674497 ETH tokens: 6 Strategy: 1
+Arbitrator 3 ETH balance: 9999.999631230941933968 ETH tokens: 0 Strategy: 2
+Arbitrator 4 ETH balance: 9999.999496119952988288 ETH tokens: 0 Strategy: 0
+Arbitrator 5 ETH balance: 10000.039386931955855309 ETH tokens: 9 Strategy: 1
+Arbitrator 6 ETH balance: 10000.039376343964587535 ETH tokens: 10 Strategy: 2
+Arbitrator 7 ETH balance: 9999.999459555975505009 ETH tokens: 3 Strategy: 0
+Arbitrator 8 ETH balance: 10000.039355167976679888 ETH tokens: 12 Strategy: 1
+Arbitrator 9 ETH balance: 9999.999438379983430586 ETH tokens: 5 Strategy: 2
+Arbitrator 10 ETH balance: 9999.999427791986130679 ETH tokens: 6 Strategy: 0
+Arbitrator 11 ETH balance: 10000.03932820398657267 ETH tokens: 5 Strategy: 1
+Arbitrator 12 ETH balance: 10000.039312815988208046 ETH tokens: 6 Strategy: 2
+Arbitrator 13 ETH balance: 9999.999551820992301002 ETH tokens: 0 Strategy: 0
+Arbitrator 14 ETH balance: 10000.039291639990827599 ETH tokens: 8 Strategy: 1
+Arbitrator 15 ETH balance: 9999.999374851992716924 ETH tokens: 1 Strategy: 2
+Arbitrator 16 ETH balance: 9999.999364263993230898 ETH tokens: 2 Strategy: 0
+Arbitrator 17 ETH balance: 10000.039259875992736854 ETH tokens: 11 Strategy: 1
+Arbitrator 18 ETH balance: 10000.039249287993008977 ETH tokens: 12 Strategy: 2
+Arbitrator 19 ETH balance: 9999.999332499994112438 ETH tokens: 5 Strategy: 0
+Arbitrator 20 ETH balance: 10000.039228111993584987 ETH tokens: 14 Strategy: 1
+Arbitrator 21 ETH balance: 9999.999832630998661048 ETH tokens: 0 Strategy: 2
+Arbitrator 22 ETH balance: 9999.999655167997241344 ETH tokens: 0 Strategy: 0
+Arbitrator 23 ETH balance: 10000.039196347993570784 ETH tokens: 7 Strategy: 1
+Arbitrator 24 ETH balance: 10000.03918575999348608 ETH tokens: 8 Strategy: 2
+Arbitrator 25 ETH balance: 9999.999268971994151776 ETH tokens: 1 Strategy: 0
+Arbitrator 26 ETH balance: 10000.039164583993316672 ETH tokens: 10 Strategy: 1
+Arbitrator 27 ETH balance: 9999.999247795993982368 ETH tokens: 3 Strategy: 2
+Arbitrator 28 ETH balance: 9999.999237207993897664 ETH tokens: 4 Strategy: 0
+Arbitrator 29 ETH balance: 10000.03913281999306256 ETH tokens: 13 Strategy: 1
+Arbitrator 30 ETH balance: 10000.039122231992977856 ETH tokens: 14 Strategy: 2
+Arbitrator 31 ETH balance: 9999.999806160998449288 ETH tokens: 0 Strategy: 0
+Arbitrator 32 ETH balance: 10000.039101055992808448 ETH tokens: 6 Strategy: 1
+Arbitrator 33 ETH balance: 9999.999393000995144008 ETH tokens: 0 Strategy: 2
+Arbitrator 34 ETH balance: 9999.99917847999342784 ETH tokens: 0 Strategy: 0
+Arbitrator 35 ETH balance: 10000.039069291992554336 ETH tokens: 9 Strategy: 1
+Arbitrator 36 ETH balance: 10000.039058703992469632 ETH tokens: 10 Strategy: 2
+Arbitrator 37 ETH balance: 9999.999141915993135328 ETH tokens: 3 Strategy: 0
+Arbitrator 38 ETH balance: 10000.039037527992300224 ETH tokens: 12 Strategy: 1
+Arbitrator 39 ETH balance: 9999.99912073999296592 ETH tokens: 5 Strategy: 2
+Arbitrator 40 ETH balance: 9999.999110151992881216 ETH tokens: 6 Strategy: 0
+Arbitrator 41 ETH balance: 10000.039010563992084512 ETH tokens: 5 Strategy: 1
+Arbitrator 42 ETH balance: 10000.038995175991961408 ETH tokens: 6 Strategy: 2
+Arbitrator 43 ETH balance: 9999.999313590994508728 ETH tokens: 0 Strategy: 0
+Arbitrator 44 ETH balance: 10000.038973999991792 ETH tokens: 8 Strategy: 1
+Arbitrator 45 ETH balance: 9999.999057211992457696 ETH tokens: 1 Strategy: 2
+Arbitrator 46 ETH balance: 9999.999046623992372992 ETH tokens: 2 Strategy: 0
+Arbitrator 47 ETH balance: 10000.038942235991537888 ETH tokens: 11 Strategy: 1
+Arbitrator 48 ETH balance: 10000.038931647991453184 ETH tokens: 12 Strategy: 2
+Arbitrator 49 ETH balance: 9999.99901485999211888 ETH tokens: 5 Strategy: 0
+Arbitrator 50 ETH balance: 10000.03546243996369952 ETH tokens: 14 Strategy: 1
+
+Contract 5:
+
+Client balance: 9947.473534688376108571 ETH
+Freelancer balance: 10049.999365234860986465 ETH
+Corp balance: 1.25 ETH
+Arbitrator 1 ETH balance: 9999.999868470899806964 ETH tokens: 0 Strategy: 0
+Arbitrator 2 ETH balance: 10000.049119469900238289 ETH tokens: 7 Strategy: 1
+Arbitrator 3 ETH balance: 9999.999631230941933968 ETH tokens: 0 Strategy: 2
+Arbitrator 4 ETH balance: 9999.999496119952988288 ETH tokens: 0 Strategy: 0
+Arbitrator 5 ETH balance: 10000.049233664954629173 ETH tokens: 10 Strategy: 1
+Arbitrator 6 ETH balance: 10000.049220429963340223 ETH tokens: 11 Strategy: 2
+Arbitrator 7 ETH balance: 9999.999324444974424121 ETH tokens: 2 Strategy: 0
+Arbitrator 8 ETH balance: 10000.049193959975390224 ETH tokens: 13 Strategy: 1
+Arbitrator 9 ETH balance: 9999.999297974982307346 ETH tokens: 4 Strategy: 2
+Arbitrator 10 ETH balance: 9999.999284739984986263 ETH tokens: 5 Strategy: 0
+Arbitrator 11 ETH balance: 10000.049159054985219478 ETH tokens: 6 Strategy: 1
+Arbitrator 12 ETH balance: 10000.049141019986833678 ETH tokens: 7 Strategy: 2
+Arbitrator 13 ETH balance: 9999.999551820992301002 ETH tokens: 0 Strategy: 0
+Arbitrator 14 ETH balance: 10000.049114549989410879 ETH tokens: 9 Strategy: 1
+Arbitrator 15 ETH balance: 9999.999223364991505028 ETH tokens: 0 Strategy: 2
+Arbitrator 16 ETH balance: 9999.999205329991959426 ETH tokens: 1 Strategy: 0
+Arbitrator 17 ETH balance: 10000.049074844991256606 ETH tokens: 12 Strategy: 1
+Arbitrator 18 ETH balance: 10000.049061609991507553 ETH tokens: 13 Strategy: 2
+Arbitrator 19 ETH balance: 9999.999165624992777438 ETH tokens: 4 Strategy: 0
+Arbitrator 20 ETH balance: 10000.049035139992041211 ETH tokens: 15 Strategy: 1
+Arbitrator 21 ETH balance: 9999.999832630998661048 ETH tokens: 0 Strategy: 2
+Arbitrator 22 ETH balance: 9999.999655167997241344 ETH tokens: 0 Strategy: 0
+Arbitrator 23 ETH balance: 10000.04899543499196348 ETH tokens: 8 Strategy: 1
+Arbitrator 24 ETH balance: 10000.0489821999918576 ETH tokens: 9 Strategy: 2
+Arbitrator 25 ETH balance: 9999.99909101499272812 ETH tokens: 0 Strategy: 0
+Arbitrator 26 ETH balance: 10000.04895572999164584 ETH tokens: 11 Strategy: 1
+Arbitrator 27 ETH balance: 9999.99905974499247796 ETH tokens: 2 Strategy: 2
+Arbitrator 28 ETH balance: 9999.99904650999237208 ETH tokens: 3 Strategy: 0
+Arbitrator 29 ETH balance: 10000.0489160249913282 ETH tokens: 14 Strategy: 1
+Arbitrator 30 ETH balance: 10000.04890278999122232 ETH tokens: 15 Strategy: 2
+Arbitrator 31 ETH balance: 9999.999806160998449288 ETH tokens: 0 Strategy: 0
+Arbitrator 32 ETH balance: 10000.04887631999101056 ETH tokens: 7 Strategy: 1
+Arbitrator 33 ETH balance: 9999.999393000995144008 ETH tokens: 0 Strategy: 2
+Arbitrator 34 ETH balance: 9999.99917847999342784 ETH tokens: 0 Strategy: 0
+Arbitrator 35 ETH balance: 10000.04883661499069292 ETH tokens: 10 Strategy: 1
+Arbitrator 36 ETH balance: 10000.04882337999058704 ETH tokens: 11 Strategy: 2
+Arbitrator 37 ETH balance: 9999.99892739499141916 ETH tokens: 2 Strategy: 0
+Arbitrator 38 ETH balance: 10000.04879690999037528 ETH tokens: 13 Strategy: 1
+Arbitrator 39 ETH balance: 9999.9989009249912074 ETH tokens: 4 Strategy: 2
+Arbitrator 40 ETH balance: 9999.99888768999110152 ETH tokens: 5 Strategy: 0
+Arbitrator 41 ETH balance: 10000.04876200499009604 ETH tokens: 6 Strategy: 1
+Arbitrator 42 ETH balance: 10000.04874396998995176 ETH tokens: 7 Strategy: 2
+Arbitrator 43 ETH balance: 9999.999313590994508728 ETH tokens: 0 Strategy: 0
+Arbitrator 44 ETH balance: 10000.04871749998974 ETH tokens: 9 Strategy: 1
+Arbitrator 45 ETH balance: 9999.99882631499061052 ETH tokens: 0 Strategy: 2
+Arbitrator 46 ETH balance: 9999.99880827999046624 ETH tokens: 1 Strategy: 0
+Arbitrator 47 ETH balance: 10000.04867779498942236 ETH tokens: 12 Strategy: 1
+Arbitrator 48 ETH balance: 10000.04866455998931648 ETH tokens: 13 Strategy: 2
+Arbitrator 49 ETH balance: 9999.9987685749901486 ETH tokens: 4 Strategy: 0
+Arbitrator 50 ETH balance: 10000.0443428499547428 ETH tokens: 15 Strategy: 1
+
+Contract 6:
+
+Client balance: 9936.968241627333764083 ETH
+Freelancer balance: 10059.999238281859970841 ETH
+Corp balance: 1.5 ETH
+Arbitrator 1 ETH balance: 9999.999868470899806964 ETH tokens: 0 Strategy: 0
+Arbitrator 2 ETH balance: 10000.058939943898802081 ETH tokens: 8 Strategy: 1
+Arbitrator 3 ETH balance: 9999.999631230941933968 ETH tokens: 0 Strategy: 2
+Arbitrator 4 ETH balance: 9999.999496119952988288 ETH tokens: 0 Strategy: 0
+Arbitrator 5 ETH balance: 10000.059080397953403037 ETH tokens: 11 Strategy: 1
+Arbitrator 6 ETH balance: 10000.059064515962092911 ETH tokens: 12 Strategy: 2
+Arbitrator 7 ETH balance: 9999.999189333973343233 ETH tokens: 1 Strategy: 0
+Arbitrator 8 ETH balance: 10000.05903275197410056 ETH tokens: 14 Strategy: 1
+Arbitrator 9 ETH balance: 9999.999157569981184106 ETH tokens: 3 Strategy: 2
+Arbitrator 10 ETH balance: 9999.999141687983841847 ETH tokens: 4 Strategy: 0
+Arbitrator 11 ETH balance: 10000.058989905983866286 ETH tokens: 7 Strategy: 1
+Arbitrator 12 ETH balance: 10000.05896922398545931 ETH tokens: 8 Strategy: 2
+Arbitrator 13 ETH balance: 9999.999551820992301002 ETH tokens: 0 Strategy: 0
+Arbitrator 14 ETH balance: 10000.058937459987994159 ETH tokens: 10 Strategy: 1
+Arbitrator 15 ETH balance: 9999.999223364991505028 ETH tokens: 0 Strategy: 2
+Arbitrator 16 ETH balance: 9999.999051195990726354 ETH tokens: 0 Strategy: 0
+Arbitrator 17 ETH balance: 10000.058889813989776358 ETH tokens: 13 Strategy: 1
+Arbitrator 18 ETH balance: 10000.058873931990006129 ETH tokens: 14 Strategy: 2
+Arbitrator 19 ETH balance: 9999.998998749991442438 ETH tokens: 3 Strategy: 0
+Arbitrator 20 ETH balance: 10000.058842167990497435 ETH tokens: 16 Strategy: 1
+Arbitrator 21 ETH balance: 9999.999832630998661048 ETH tokens: 0 Strategy: 2
+Arbitrator 22 ETH balance: 9999.999655167997241344 ETH tokens: 0 Strategy: 0
+Arbitrator 23 ETH balance: 10000.058794521990356176 ETH tokens: 9 Strategy: 1
+Arbitrator 24 ETH balance: 10000.05877863999022912 ETH tokens: 10 Strategy: 2
+Arbitrator 25 ETH balance: 9999.99909101499272812 ETH tokens: 0 Strategy: 0
+Arbitrator 26 ETH balance: 10000.058746875989975008 ETH tokens: 12 Strategy: 1
+Arbitrator 27 ETH balance: 9999.998871693990973552 ETH tokens: 1 Strategy: 2
+Arbitrator 28 ETH balance: 9999.998855811990846496 ETH tokens: 2 Strategy: 0
+Arbitrator 29 ETH balance: 10000.05869922998959384 ETH tokens: 15 Strategy: 1
+Arbitrator 30 ETH balance: 10000.058683347989466784 ETH tokens: 16 Strategy: 2
+Arbitrator 31 ETH balance: 9999.999806160998449288 ETH tokens: 0 Strategy: 0
+Arbitrator 32 ETH balance: 10000.058651583989212672 ETH tokens: 8 Strategy: 1
+Arbitrator 33 ETH balance: 9999.999393000995144008 ETH tokens: 0 Strategy: 2
+Arbitrator 34 ETH balance: 9999.99917847999342784 ETH tokens: 0 Strategy: 0
+Arbitrator 35 ETH balance: 10000.058603937988831504 ETH tokens: 11 Strategy: 1
+Arbitrator 36 ETH balance: 10000.058588055988704448 ETH tokens: 12 Strategy: 2
+Arbitrator 37 ETH balance: 9999.998712873989702992 ETH tokens: 1 Strategy: 0
+Arbitrator 38 ETH balance: 10000.058556291988450336 ETH tokens: 14 Strategy: 1
+Arbitrator 39 ETH balance: 9999.99868110998944888 ETH tokens: 3 Strategy: 2
+Arbitrator 40 ETH balance: 9999.998665227989321824 ETH tokens: 4 Strategy: 0
+Arbitrator 41 ETH balance: 10000.058513445988107568 ETH tokens: 7 Strategy: 1
+Arbitrator 42 ETH balance: 10000.058492763987942112 ETH tokens: 8 Strategy: 2
+Arbitrator 43 ETH balance: 9999.999313590994508728 ETH tokens: 0 Strategy: 0
+Arbitrator 44 ETH balance: 10000.058460999987688 ETH tokens: 10 Strategy: 1
+Arbitrator 45 ETH balance: 9999.99882631499061052 ETH tokens: 0 Strategy: 2
+Arbitrator 46 ETH balance: 9999.998574735988597888 ETH tokens: 0 Strategy: 0
+Arbitrator 47 ETH balance: 10000.058413353987306832 ETH tokens: 13 Strategy: 1
+Arbitrator 48 ETH balance: 10000.058397471987179776 ETH tokens: 14 Strategy: 2
+Arbitrator 49 ETH balance: 9999.99852228998817832 ETH tokens: 3 Strategy: 0
+Arbitrator 50 ETH balance: 10000.05322325994578608 ETH tokens: 16 Strategy: 1
+
+Contract 7:
+
+Client balance: 9926.462948566291419595 ETH
+Freelancer balance: 10069.999111328858955217 ETH
+Corp balance: 1.75 ETH
+Arbitrator 1 ETH balance: 9999.999868470899806964 ETH tokens: 0 Strategy: 0
+Arbitrator 2 ETH balance: 10000.068760417897365873 ETH tokens: 9 Strategy: 1
+Arbitrator 3 ETH balance: 9999.999631230941933968 ETH tokens: 0 Strategy: 2
+Arbitrator 4 ETH balance: 9999.999496119952988288 ETH tokens: 0 Strategy: 0
+Arbitrator 5 ETH balance: 10000.068927130952176901 ETH tokens: 12 Strategy: 1
+Arbitrator 6 ETH balance: 10000.068908601960845599 ETH tokens: 13 Strategy: 2
+Arbitrator 7 ETH balance: 9999.999059022972300745 ETH tokens: 0 Strategy: 0
+Arbitrator 8 ETH balance: 10000.068871543972810896 ETH tokens: 15 Strategy: 1
+Arbitrator 9 ETH balance: 9999.999017164980060866 ETH tokens: 2 Strategy: 2
+Arbitrator 10 ETH balance: 9999.998998635982697431 ETH tokens: 3 Strategy: 0
+Arbitrator 11 ETH balance: 10000.068820756982513094 ETH tokens: 8 Strategy: 1
+Arbitrator 12 ETH balance: 10000.068797427984084942 ETH tokens: 9 Strategy: 2
+Arbitrator 13 ETH balance: 9999.999551820992301002 ETH tokens: 0 Strategy: 0
+Arbitrator 14 ETH balance: 10000.068760369986577439 ETH tokens: 11 Strategy: 1
+Arbitrator 15 ETH balance: 9999.999223364991505028 ETH tokens: 0 Strategy: 2
+Arbitrator 16 ETH balance: 9999.999051195990726354 ETH tokens: 0 Strategy: 0
+Arbitrator 17 ETH balance: 10000.06870478298829611 ETH tokens: 14 Strategy: 1
+Arbitrator 18 ETH balance: 10000.068686253988504705 ETH tokens: 15 Strategy: 2
+Arbitrator 19 ETH balance: 9999.998831874990107438 ETH tokens: 2 Strategy: 0
+Arbitrator 20 ETH balance: 10000.068649195988953659 ETH tokens: 17 Strategy: 1
+Arbitrator 21 ETH balance: 9999.999832630998661048 ETH tokens: 0 Strategy: 2
+Arbitrator 22 ETH balance: 9999.999655167997241344 ETH tokens: 0 Strategy: 0
+Arbitrator 23 ETH balance: 10000.068593608988748872 ETH tokens: 10 Strategy: 1
+Arbitrator 24 ETH balance: 10000.06857507998860064 ETH tokens: 11 Strategy: 2
+Arbitrator 25 ETH balance: 9999.99909101499272812 ETH tokens: 0 Strategy: 0
+Arbitrator 26 ETH balance: 10000.068538021988304176 ETH tokens: 13 Strategy: 1
+Arbitrator 27 ETH balance: 9999.998688442989507544 ETH tokens: 0 Strategy: 2
+Arbitrator 28 ETH balance: 9999.998665113989320912 ETH tokens: 1 Strategy: 0
+Arbitrator 29 ETH balance: 10000.06848243498785948 ETH tokens: 16 Strategy: 1
+Arbitrator 30 ETH balance: 10000.068463905987711248 ETH tokens: 17 Strategy: 2
+Arbitrator 31 ETH balance: 9999.999806160998449288 ETH tokens: 0 Strategy: 0
+Arbitrator 32 ETH balance: 10000.068426847987414784 ETH tokens: 9 Strategy: 1
+Arbitrator 33 ETH balance: 9999.999393000995144008 ETH tokens: 0 Strategy: 2
+Arbitrator 34 ETH balance: 9999.99917847999342784 ETH tokens: 0 Strategy: 0
+Arbitrator 35 ETH balance: 10000.068371260986970088 ETH tokens: 12 Strategy: 1
+Arbitrator 36 ETH balance: 10000.068352731986821856 ETH tokens: 13 Strategy: 2
+Arbitrator 37 ETH balance: 9999.998503152988025224 ETH tokens: 0 Strategy: 0
+Arbitrator 38 ETH balance: 10000.068315673986525392 ETH tokens: 15 Strategy: 1
+Arbitrator 39 ETH balance: 9999.99846129498769036 ETH tokens: 2 Strategy: 2
+Arbitrator 40 ETH balance: 9999.998442765987542128 ETH tokens: 3 Strategy: 0
+Arbitrator 41 ETH balance: 10000.068264886986119096 ETH tokens: 8 Strategy: 1
+Arbitrator 42 ETH balance: 10000.068241557985932464 ETH tokens: 9 Strategy: 2
+Arbitrator 43 ETH balance: 9999.999313590994508728 ETH tokens: 0 Strategy: 0
+Arbitrator 44 ETH balance: 10000.068204499985636 ETH tokens: 11 Strategy: 1
+Arbitrator 45 ETH balance: 9999.99882631499061052 ETH tokens: 0 Strategy: 2
+Arbitrator 46 ETH balance: 9999.998574735988597888 ETH tokens: 0 Strategy: 0
+Arbitrator 47 ETH balance: 10000.068148912985191304 ETH tokens: 14 Strategy: 1
+Arbitrator 48 ETH balance: 10000.068130383985043072 ETH tokens: 15 Strategy: 2
+Arbitrator 49 ETH balance: 9999.99827600498620804 ETH tokens: 2 Strategy: 0
+Arbitrator 50 ETH balance: 10000.06210366993682936 ETH tokens: 17 Strategy: 1
+
+Contract 8:
+
+Client balance: 9915.957655505249075107 ETH
+Freelancer balance: 10079.998984375857939593 ETH
+Corp balance: 2.0 ETH
+Arbitrator 1 ETH balance: 9999.999868470899806964 ETH tokens: 0 Strategy: 0
+Arbitrator 2 ETH balance: 10000.078580891895929665 ETH tokens: 10 Strategy: 1
+Arbitrator 3 ETH balance: 9999.999631230941933968 ETH tokens: 0 Strategy: 2
+Arbitrator 4 ETH balance: 9999.999496119952988288 ETH tokens: 0 Strategy: 0
+Arbitrator 5 ETH balance: 10000.078773863950950765 ETH tokens: 13 Strategy: 1
+Arbitrator 6 ETH balance: 10000.078752687959598287 ETH tokens: 14 Strategy: 2
+Arbitrator 7 ETH balance: 9999.999059022972300745 ETH tokens: 0 Strategy: 0
+Arbitrator 8 ETH balance: 10000.078710335971521232 ETH tokens: 16 Strategy: 1
+Arbitrator 9 ETH balance: 9999.998876759978937626 ETH tokens: 1 Strategy: 2
+Arbitrator 10 ETH balance: 9999.998855583981553015 ETH tokens: 2 Strategy: 0
+Arbitrator 11 ETH balance: 10000.078651607981159902 ETH tokens: 9 Strategy: 1
+Arbitrator 12 ETH balance: 10000.078625631982710574 ETH tokens: 10 Strategy: 2
+Arbitrator 13 ETH balance: 9999.999551820992301002 ETH tokens: 0 Strategy: 0
+Arbitrator 14 ETH balance: 10000.078583279985160719 ETH tokens: 12 Strategy: 1
+Arbitrator 15 ETH balance: 9999.999223364991505028 ETH tokens: 0 Strategy: 2
+Arbitrator 16 ETH balance: 9999.999051195990726354 ETH tokens: 0 Strategy: 0
+Arbitrator 17 ETH balance: 10000.078519751986815862 ETH tokens: 15 Strategy: 1
+Arbitrator 18 ETH balance: 10000.078498575987003281 ETH tokens: 16 Strategy: 2
+Arbitrator 19 ETH balance: 9999.998664999988772438 ETH tokens: 1 Strategy: 0
+Arbitrator 20 ETH balance: 10000.078456223987409883 ETH tokens: 18 Strategy: 1
+Arbitrator 21 ETH balance: 9999.999832630998661048 ETH tokens: 0 Strategy: 2
+Arbitrator 22 ETH balance: 9999.999655167997241344 ETH tokens: 0 Strategy: 0
+Arbitrator 23 ETH balance: 10000.078392695987141568 ETH tokens: 11 Strategy: 1
+Arbitrator 24 ETH balance: 10000.07837151998697216 ETH tokens: 12 Strategy: 2
+Arbitrator 25 ETH balance: 9999.99909101499272812 ETH tokens: 0 Strategy: 0
+Arbitrator 26 ETH balance: 10000.078329167986633344 ETH tokens: 14 Strategy: 1
+Arbitrator 27 ETH balance: 9999.998688442989507544 ETH tokens: 0 Strategy: 2
+Arbitrator 28 ETH balance: 9999.998479215987833728 ETH tokens: 0 Strategy: 0
+Arbitrator 29 ETH balance: 10000.07826563998612512 ETH tokens: 17 Strategy: 1
+Arbitrator 30 ETH balance: 10000.078244463985955712 ETH tokens: 18 Strategy: 2
+Arbitrator 31 ETH balance: 9999.999806160998449288 ETH tokens: 0 Strategy: 0
+Arbitrator 32 ETH balance: 10000.078202111985616896 ETH tokens: 10 Strategy: 1
+Arbitrator 33 ETH balance: 9999.999393000995144008 ETH tokens: 0 Strategy: 2
+Arbitrator 34 ETH balance: 9999.99917847999342784 ETH tokens: 0 Strategy: 0
+Arbitrator 35 ETH balance: 10000.078138583985108672 ETH tokens: 13 Strategy: 1
+Arbitrator 36 ETH balance: 10000.078117407984939264 ETH tokens: 14 Strategy: 2
+Arbitrator 37 ETH balance: 9999.998503152988025224 ETH tokens: 0 Strategy: 0
+Arbitrator 38 ETH balance: 10000.078075055984600448 ETH tokens: 16 Strategy: 1
+Arbitrator 39 ETH balance: 9999.99824147998593184 ETH tokens: 1 Strategy: 2
+Arbitrator 40 ETH balance: 9999.998220303985762432 ETH tokens: 2 Strategy: 0
+Arbitrator 41 ETH balance: 10000.078016327984130624 ETH tokens: 9 Strategy: 1
+Arbitrator 42 ETH balance: 10000.077990351983922816 ETH tokens: 10 Strategy: 2
+Arbitrator 43 ETH balance: 9999.999313590994508728 ETH tokens: 0 Strategy: 0
+Arbitrator 44 ETH balance: 10000.077947999983584 ETH tokens: 12 Strategy: 1
+Arbitrator 45 ETH balance: 9999.99882631499061052 ETH tokens: 0 Strategy: 2
+Arbitrator 46 ETH balance: 9999.998574735988597888 ETH tokens: 0 Strategy: 0
+Arbitrator 47 ETH balance: 10000.077884471983075776 ETH tokens: 15 Strategy: 1
+Arbitrator 48 ETH balance: 10000.077863295982906368 ETH tokens: 16 Strategy: 2
+Arbitrator 49 ETH balance: 9999.99802971998423776 ETH tokens: 1 Strategy: 0
+Arbitrator 50 ETH balance: 10000.07098407992787264 ETH tokens: 18 Strategy: 1
+
+Contract 9:
+
+Client balance: 9905.452362444206730619 ETH
+Freelancer balance: 10089.998857422856923969 ETH
+Corp balance: 2.25 ETH
+Arbitrator 1 ETH balance: 9999.999868470899806964 ETH tokens: 0 Strategy: 0
+Arbitrator 2 ETH balance: 10000.088401377894493553 ETH tokens: 11 Strategy: 1
+Arbitrator 3 ETH balance: 9999.999631230941933968 ETH tokens: 0 Strategy: 2
+Arbitrator 4 ETH balance: 9999.999496119952988288 ETH tokens: 0 Strategy: 0
+Arbitrator 5 ETH balance: 10000.088620608949724725 ETH tokens: 14 Strategy: 1
+Arbitrator 6 ETH balance: 10000.088596785958351071 ETH tokens: 15 Strategy: 2
+Arbitrator 7 ETH balance: 9999.999059022972300745 ETH tokens: 0 Strategy: 0
+Arbitrator 8 ETH balance: 10000.088549139970231664 ETH tokens: 17 Strategy: 1
+Arbitrator 9 ETH balance: 9999.998741166977852882 ETH tokens: 0 Strategy: 2
+Arbitrator 10 ETH balance: 9999.998712543980408695 ETH tokens: 1 Strategy: 0
+Arbitrator 11 ETH balance: 10000.088482470979806806 ETH tokens: 10 Strategy: 1
+Arbitrator 12 ETH balance: 10000.088453847981336302 ETH tokens: 11 Strategy: 2
+Arbitrator 13 ETH balance: 9999.999551820992301002 ETH tokens: 0 Strategy: 0
+Arbitrator 14 ETH balance: 10000.088406201983744095 ETH tokens: 13 Strategy: 1
+Arbitrator 15 ETH balance: 9999.999223364991505028 ETH tokens: 0 Strategy: 2
+Arbitrator 16 ETH balance: 9999.999051195990726354 ETH tokens: 0 Strategy: 0
+Arbitrator 17 ETH balance: 10000.08833473298533571 ETH tokens: 16 Strategy: 1
+Arbitrator 18 ETH balance: 10000.088310909985501953 ETH tokens: 17 Strategy: 2
+Arbitrator 19 ETH balance: 9999.998502936987475934 ETH tokens: 0 Strategy: 0
+Arbitrator 20 ETH balance: 10000.088263263985866203 ETH tokens: 19 Strategy: 1
+Arbitrator 21 ETH balance: 9999.999832630998661048 ETH tokens: 0 Strategy: 2
+Arbitrator 22 ETH balance: 9999.999655167997241344 ETH tokens: 0 Strategy: 0
+Arbitrator 23 ETH balance: 10000.08819179498553436 ETH tokens: 12 Strategy: 1
+Arbitrator 24 ETH balance: 10000.088167971985343776 ETH tokens: 13 Strategy: 2
+Arbitrator 25 ETH balance: 9999.99909101499272812 ETH tokens: 0 Strategy: 0
+Arbitrator 26 ETH balance: 10000.088120325984962608 ETH tokens: 15 Strategy: 1
+Arbitrator 27 ETH balance: 9999.998688442989507544 ETH tokens: 0 Strategy: 2
+Arbitrator 28 ETH balance: 9999.998479215987833728 ETH tokens: 0 Strategy: 0
+Arbitrator 29 ETH balance: 10000.088048856984390856 ETH tokens: 18 Strategy: 1
+Arbitrator 30 ETH balance: 10000.088025033984200272 ETH tokens: 19 Strategy: 2
+Arbitrator 31 ETH balance: 9999.999806160998449288 ETH tokens: 0 Strategy: 0
+Arbitrator 32 ETH balance: 10000.087977387983819104 ETH tokens: 11 Strategy: 1
+Arbitrator 33 ETH balance: 9999.999393000995144008 ETH tokens: 0 Strategy: 2
+Arbitrator 34 ETH balance: 9999.99917847999342784 ETH tokens: 0 Strategy: 0
+Arbitrator 35 ETH balance: 10000.087905918983247352 ETH tokens: 14 Strategy: 1
+Arbitrator 36 ETH balance: 10000.087882095983056768 ETH tokens: 15 Strategy: 2
+Arbitrator 37 ETH balance: 9999.998503152988025224 ETH tokens: 0 Strategy: 0
+Arbitrator 38 ETH balance: 10000.0878344499826756 ETH tokens: 17 Strategy: 1
+Arbitrator 39 ETH balance: 9999.998026476984211816 ETH tokens: 0 Strategy: 2
+Arbitrator 40 ETH balance: 9999.997997853983982832 ETH tokens: 1 Strategy: 0
+Arbitrator 41 ETH balance: 10000.087767780982142248 ETH tokens: 10 Strategy: 1
+Arbitrator 42 ETH balance: 10000.087739157981913264 ETH tokens: 11 Strategy: 2
+Arbitrator 43 ETH balance: 9999.999313590994508728 ETH tokens: 0 Strategy: 0
+Arbitrator 44 ETH balance: 10000.087691511981532096 ETH tokens: 13 Strategy: 1
+Arbitrator 45 ETH balance: 9999.99882631499061052 ETH tokens: 0 Strategy: 2
+Arbitrator 46 ETH balance: 9999.998574735988597888 ETH tokens: 0 Strategy: 0
+Arbitrator 47 ETH balance: 10000.087620042980960344 ETH tokens: 16 Strategy: 1
+Arbitrator 48 ETH balance: 10000.08759621998076976 ETH tokens: 17 Strategy: 2
+Arbitrator 49 ETH balance: 9999.997788246982305976 ETH tokens: 0 Strategy: 0
+Arbitrator 50 ETH balance: 10000.079864501918916016 ETH tokens: 19 Strategy: 1
+
+Contract 10:
+
+Client balance: 9894.947069359164385939 ETH
+Freelancer balance: 10099.998730457855908249 ETH
+Corp balance: 2.5 ETH
+Arbitrator 1 ETH balance: 9999.999868470899806964 ETH tokens: 0 Strategy: 0
+Arbitrator 2 ETH balance: 10000.098221863893057441 ETH tokens: 12 Strategy: 1
+Arbitrator 3 ETH balance: 9999.999631230941933968 ETH tokens: 0 Strategy: 2
+Arbitrator 4 ETH balance: 9999.999496119952988288 ETH tokens: 0 Strategy: 0
+Arbitrator 5 ETH balance: 10000.098467353948498685 ETH tokens: 15 Strategy: 1
+Arbitrator 6 ETH balance: 10000.098440883957103855 ETH tokens: 16 Strategy: 2
+Arbitrator 7 ETH balance: 9999.999059022972300745 ETH tokens: 0 Strategy: 0
+Arbitrator 8 ETH balance: 10000.098387943968942096 ETH tokens: 18 Strategy: 1
+Arbitrator 9 ETH balance: 9999.998741166977852882 ETH tokens: 0 Strategy: 2
+Arbitrator 10 ETH balance: 9999.998574303979302775 ETH tokens: 0 Strategy: 0
+Arbitrator 11 ETH balance: 10000.09831333397845371 ETH tokens: 11 Strategy: 1
+Arbitrator 12 ETH balance: 10000.09828206397996203 ETH tokens: 12 Strategy: 2
+Arbitrator 13 ETH balance: 9999.999551820992301002 ETH tokens: 0 Strategy: 0
+Arbitrator 14 ETH balance: 10000.098229123982327471 ETH tokens: 14 Strategy: 1
+Arbitrator 15 ETH balance: 9999.999223364991505028 ETH tokens: 0 Strategy: 2
+Arbitrator 16 ETH balance: 9999.999051195990726354 ETH tokens: 0 Strategy: 0
+Arbitrator 17 ETH balance: 10000.098149713983855558 ETH tokens: 17 Strategy: 1
+Arbitrator 18 ETH balance: 10000.098123243984000625 ETH tokens: 18 Strategy: 2
+Arbitrator 19 ETH balance: 9999.998502936987475934 ETH tokens: 0 Strategy: 0
+Arbitrator 20 ETH balance: 10000.098070303984322523 ETH tokens: 20 Strategy: 1
+Arbitrator 21 ETH balance: 9999.999832630998661048 ETH tokens: 0 Strategy: 2
+Arbitrator 22 ETH balance: 9999.999655167997241344 ETH tokens: 0 Strategy: 0
+Arbitrator 23 ETH balance: 10000.097990893983927152 ETH tokens: 13 Strategy: 1
+Arbitrator 24 ETH balance: 10000.097964423983715392 ETH tokens: 14 Strategy: 2
+Arbitrator 25 ETH balance: 9999.99909101499272812 ETH tokens: 0 Strategy: 0
+Arbitrator 26 ETH balance: 10000.097911483983291872 ETH tokens: 16 Strategy: 1
+Arbitrator 27 ETH balance: 9999.998688442989507544 ETH tokens: 0 Strategy: 2
+Arbitrator 28 ETH balance: 9999.998479215987833728 ETH tokens: 0 Strategy: 0
+Arbitrator 29 ETH balance: 10000.097832073982656592 ETH tokens: 19 Strategy: 1
+Arbitrator 30 ETH balance: 10000.097805603982444832 ETH tokens: 20 Strategy: 2
+Arbitrator 31 ETH balance: 9999.999806160998449288 ETH tokens: 0 Strategy: 0
+Arbitrator 32 ETH balance: 10000.097752663982021312 ETH tokens: 12 Strategy: 1
+Arbitrator 33 ETH balance: 9999.999393000995144008 ETH tokens: 0 Strategy: 2
+Arbitrator 34 ETH balance: 9999.99917847999342784 ETH tokens: 0 Strategy: 0
+Arbitrator 35 ETH balance: 10000.097673253981386032 ETH tokens: 15 Strategy: 1
+Arbitrator 36 ETH balance: 10000.097646783981174272 ETH tokens: 16 Strategy: 2
+Arbitrator 37 ETH balance: 9999.998503152988025224 ETH tokens: 0 Strategy: 0
+Arbitrator 38 ETH balance: 10000.097593843980750752 ETH tokens: 18 Strategy: 1
+Arbitrator 39 ETH balance: 9999.998026476984211816 ETH tokens: 0 Strategy: 2
+Arbitrator 40 ETH balance: 9999.997780203982241632 ETH tokens: 0 Strategy: 0
+Arbitrator 41 ETH balance: 10000.097519233980153872 ETH tokens: 11 Strategy: 1
+Arbitrator 42 ETH balance: 10000.097487963979903712 ETH tokens: 12 Strategy: 2
+Arbitrator 43 ETH balance: 9999.999313590994508728 ETH tokens: 0 Strategy: 0
+Arbitrator 44 ETH balance: 10000.097435023979480192 ETH tokens: 14 Strategy: 1
+Arbitrator 45 ETH balance: 9999.99882631499061052 ETH tokens: 0 Strategy: 2
+Arbitrator 46 ETH balance: 9999.998574735988597888 ETH tokens: 0 Strategy: 0
+Arbitrator 47 ETH balance: 10000.097355613978844912 ETH tokens: 17 Strategy: 1
+Arbitrator 48 ETH balance: 10000.097329143978633152 ETH tokens: 18 Strategy: 2
+Arbitrator 49 ETH balance: 9999.997788246982305976 ETH tokens: 0 Strategy: 0
+Arbitrator 50 ETH balance: 10000.088744923909959392 ETH tokens: 20 Strategy: 1
+    ✔ should simulate contracts with disputes and arbitrator voting (969ms)
+
+  FreelancerEscrow and GovernanceToken Integration
+    1) Simulates multiple contracts with disputes and arbitrators
+
+  FreelancerEscrow Contract
+    ✔ Should initialize correctly
+    ✔ Should allow the client to make a deposit
+    ✔ Should revert if deposit is made by someone other than the client
+    ✔ The sum of all deposits must equal the total payment
+    ✔ Should allow the freelancer to complete the deliverable with a message
+    ✔ Should revert if deliverable completed is called by someone else
+    ✔ Should allow the client to confirm delivery and transfer funds
+    ✔ Should trasnfer the commission fee to the owner
+    ✔ Finishing all milestones should set the state to completed
+    ✔ Should allow the client to raise a dispute
+    ✔ Should allow multiple arbitrators to vote on a dispute and resolve
+
+  Governance Token Contract
+    ✔ Should add arbitrator with 1 tokens and 1 reputation point in balance
+    ✔ Length of all arbitrators should be 2
+
+
+  14 passing (3s)
+  1 failing
+
+  1) FreelancerEscrow and GovernanceToken Integration
+       Simulates multiple contracts with disputes and arbitrators:
+     Error: incorrect number of arguments to constructor
+      at ContractFactory.getDeployTransaction (node_modules/ethers/src.ts/contract/factory.ts:87:19)
+      at ContractFactory.deploy (node_modules/ethers/src.ts/contract/factory.ts:105:31)
+      at Context.<anonymous> (test/FreelancerEscrowHollisticTest.js:33:42)
+
+
+
