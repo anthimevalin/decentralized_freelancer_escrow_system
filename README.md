@@ -5,7 +5,7 @@ This project consists of two smart contracts: FreelancerEscrow and GovernanceTok
 
 ### Main Features
 1. Escrow Management:
-  * Secures payments between a client and a freelancer for milestones in a project
+   * Secures payments between a client and a freelancer for milestones in a project
   * Provides milestone-based payouts
   * Holds funds securely until milestones are completed (by freelancer) and approved (by clients)
   * Providers of the system (corp) receive a 5% commission on top of all deposits made by the client 
