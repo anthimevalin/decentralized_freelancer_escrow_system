@@ -6,8 +6,8 @@ describe("FinalOverallTest", function () {
     let arbitrators = [];
     let arbitratorDetails = {};
     let contracts = [];
-    const NUM_ARBITRATORS = 3;
-    const NUM_CONTRACTS = 10;
+    const NUM_ARBITRATORS = 50;
+    const NUM_CONTRACTS = 20;
     let clients = [];
     let freelancers = [];
     const corpAddress = "0x4F259744634C65F2e2cFe70bAF3C0EA04640631b";
@@ -382,6 +382,7 @@ describe("FinalOverallTest", function () {
                 InitialTokenBalance: initialArbitratorTokenBalance,
                 InitialBalance: ethers.formatEther(initialArbitratorBalance),
                 VotedContracts: votedContracts.join(", "), // List of contracts arbitrator successfully voted on
+                NumberOfContractsVoted: votedContracts.length,
             });
         }
     
