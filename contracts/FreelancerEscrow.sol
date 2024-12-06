@@ -9,7 +9,6 @@ contract FreelancerEscrow {
     address public client;
     address public freelancer;
     address public corp;
-    //address [] public arbitrators;
     uint256 public totalPayment;
     string public projectDescription;
     string public completionMessage;
@@ -85,7 +84,7 @@ contract FreelancerEscrow {
         require(msg.sender == client, "Only client can perform this action");
         require(state == EscrowState.AWAITING_DEPOSIT, "Invalid state for this action");
 
-        if (milestoneCompleted == milestoneCount) {
+        if (milestoneCompleted == milestoneCount - 1) {
             depositAmount = (totalPayment - paymentMade);
         }
 
@@ -111,6 +110,7 @@ contract FreelancerEscrow {
 
         completionMessage = message;
         
+        milestoneCompleted++;
 
         if (milestoneCompleted == milestoneCount) {
             state = EscrowState.COMPLETED;
@@ -119,7 +119,8 @@ contract FreelancerEscrow {
             state = EscrowState.AWAITING_APPROVAL;
             emit MilestoneCompleted(freelancer, client, message);
         }
-        milestoneCompleted++;
+        
+        
     }
 
     function confirmMilestoneAndMakePayment() external {
@@ -136,9 +137,6 @@ contract FreelancerEscrow {
             emit DeliveryConfirmed(client, freelancer);
             payable(corp).transfer(address(this).balance);
 
-            // Transfer governance tokens to the client and freelancer -- only adds tokens for the first conctract
-            governanceToken.addArbitrator(client);
-            governanceToken.addArbitrator(freelancer);
         } else {
             state = EscrowState.AWAITING_DEPOSIT;
             emit MilestoneConfirmed(client, freelancer, nextPayment);
@@ -169,10 +167,10 @@ contract FreelancerEscrow {
         newDispute.votesForFreelancer = 0;
         newDispute.votesForClient = 0;
 
-        uint256 sampleSize = governanceToken.getAllArbitrators().length; // Eventually change to something logarithmic
+        uint256 sampleSize = governanceToken.getAllArbitrators().length; 
         newDispute.sampleSize = sampleSize;
 
-        newDispute.arbitrators = governanceToken.getAllArbitrators(); // governanceToken.getRandomSampleOfArbitrators(sampleSize);
+        newDispute.arbitrators = governanceToken.getAllArbitrators(); 
 
         disputesByParty[msg.sender].push(disputeCount);
 
@@ -182,7 +180,7 @@ contract FreelancerEscrow {
     // Function to vote on a dispute
     function voteOnDispute(uint256 disputeId, VoteFor newVote) external {
         require(disputeId > 0 && disputeId <= disputeCount, "Invalid dispute ID");
-        
+        require(state == EscrowState.AWAITING_DELIVERABLE || state == EscrowState.AWAITING_APPROVAL || state == EscrowState.COMPLETED, "Invalid state for this action");
         Dispute storage dispute = disputes[disputeId - 1];
         if (dispute.disputeState == DisputeState.RESOLVED) {
             return;
@@ -192,7 +190,7 @@ contract FreelancerEscrow {
         require(dispute.disputeState == DisputeState.RAISED, "Dispute already resolved");
         require(governanceToken.balanceOf(msg.sender) >= 1, "Must hold governance tokens to vote");
         require(dispute.votes[msg.sender] == VoteFor.NONE, "Cannot vote for the same dispute twice");
-
+        governanceToken.approve(address(this), 1);
         governanceToken.transferFrom(msg.sender, address(this), 1);
 
         if (newVote == VoteFor.FREELANCER) {
@@ -213,11 +211,10 @@ contract FreelancerEscrow {
 
     function resolveDispute (uint256 disputeId) internal {
         require(disputeId > 0 && disputeId <= disputeCount, "Invalid dispute ID");
-        
         require(address(this).balance >= nextPayment, "Insufficient contract balance");
 
         Dispute storage dispute = disputes[disputeId - 1];
-
+        require(dispute.disputeState == DisputeState.RAISED, "Dispute already resolved");
         if (dispute.votesForFreelancer >= dispute.sampleSize / 2) {
             state = EscrowState.CONFIRMED;
             emit DisputeResolved(disputeId, freelancer, state, "Freelancer won the dispute");

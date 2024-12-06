@@ -9,7 +9,7 @@ describe("FreelancerEscrow Contract", function () {
 
         const totalPayment = ethers.parseEther("1.0"); // Parse 1 Ether to Wei
         const projectDescription = "Build a dApp";
-        const milestoneCount = 1;
+        const milestoneCount = 2;
 
         const GovernanceToken = await ethers.getContractFactory("GovernanceToken");
         governanceToken = await GovernanceToken.deploy();
@@ -33,7 +33,7 @@ describe("FreelancerEscrow Contract", function () {
         expect(await escrow.freelancer()).to.equal(freelancer.address);
         expect(await escrow.totalPayment()).to.equal(ethers.parseEther("1.0"));
         expect(await escrow.projectDescription()).to.equal("Build a dApp");
-        expect(await escrow.milestoneCount()).to.equal(1);
+        expect(await escrow.milestoneCount()).to.equal(2);
     });
 
 

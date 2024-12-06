@@ -33,11 +33,13 @@ contract GovernanceToken is ERC20, Ownable {
     }
 
     function addArbitrator(address arbitrator) external { //onlyOwner
-        require(!arbitrators[arbitrator], "Already an arbitrator");
-        arbitrators[arbitrator] = true;
-        _mint(arbitrator, 1);
-        reputation[arbitrator] = 1;
-        allArbitrators.push(arbitrator);
+        if (!arbitrators[arbitrator]) {
+            arbitrators[arbitrator] = true;
+            _mint(arbitrator, 1);
+            reputation[arbitrator] = 1;
+            allArbitrators.push(arbitrator); 
+        }
+        
     }
 
     function removeArbitrator(address arbitrator) external onlyOwner {
@@ -49,31 +51,6 @@ contract GovernanceToken is ERC20, Ownable {
         reputation[arbitrator]++;
     }
     
-
-    function getRandomSampleOfArbitrators(uint256 sampleSize) external view returns (address[] memory) {
-        require(sampleSize <= allArbitrators.length, "Sample size exceeds number of arbitrators");
-
-        address[] memory sample = new address[](sampleSize);
-        uint256[] memory cumulativeWeights = new uint256[](allArbitrators.length);
-        uint256 totalWeight = 0;
-
-        for (uint256 i = 0; i < allArbitrators.length; i++) {
-            totalWeight += reputation[allArbitrators[i]];
-            cumulativeWeights[i] = totalWeight;
-        }
-
-        for (uint256 i = 0; i < sampleSize; i++) {
-            uint256 randomWeight = uint256(keccak256(abi.encodePacked(i))) % totalWeight;
-            for (uint256 j = 0; j < cumulativeWeights.length; j++) {
-                if (randomWeight < cumulativeWeights[j]) {
-                    sample[i] = allArbitrators[j];
-                    break;
-                }
-            }
-        }
-
-        return sample;
-    }
 
     function transfer(address to, uint256 value) public override returns (bool) {
         // Add custom logic here (e.g., additional validation or event logging)
